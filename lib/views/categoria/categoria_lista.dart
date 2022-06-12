@@ -36,7 +36,10 @@ class _CategoriaListaViewState extends State<CategoriaListaView> {
               return Card(
                 child: ListTile(
                   title: Text(lista[categoria].descricao),
-
+                  trailing: IconButton(
+                    onPressed: (){},
+                    icon: Icon(Icons.delete,),
+                  ),
                 ),
               );
             },
