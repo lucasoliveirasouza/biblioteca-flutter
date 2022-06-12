@@ -1,20 +1,17 @@
-
 import 'package:biblioteca/componentes/easy_dropdown.dart';
 import 'package:biblioteca/models/livro.dart';
 import 'package:biblioteca/services/categoria_service.dart';
-import 'package:biblioteca/services/livro_service.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
-class LivroCadastrarView extends StatefulWidget {
-  LivroCadastrarView({Key? key}) : super(key: key);
+class LivroEditarView extends StatefulWidget {
+  Livro livro;
+  LivroEditarView({Key? key, required this.livro}) : super(key: key);
 
   @override
-  _LivroCadastrarViewState createState() => _LivroCadastrarViewState();
+  _LivroEditarViewState createState() => _LivroEditarViewState();
 }
 
-class _LivroCadastrarViewState extends State<LivroCadastrarView> {
+class _LivroEditarViewState extends State<LivroEditarView> {
   final titulo = TextEditingController();
   final autor = TextEditingController();
   final editora = TextEditingController();
@@ -28,9 +25,15 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
 
   @override
   Widget build(BuildContext context) {
+    titulo.text = widget.livro.titulo;
+    autor.text = widget.livro.autor;
+    editora.text = widget.livro.editora;
+    isbn.text = widget.livro.isbn;
+    imagem.text = widget.livro.imagem;
+    ano.text = widget.livro.ano.toString();
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cadastrar Livro"),
+        title: Text("Editar Livro"),
       ),
       body: Form(
         key: formKey,
@@ -189,9 +192,7 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      Livro livro = Livro(0, titulo.text, autor.text, editora.text, int.parse(ano.text), isbn.text, imagem.text);
-                      Provider.of<LivroService>(context, listen: false).cadastrarLivro(livro, valor);
-                      Get.back();
+
                     }
                   },
                   child: Text(

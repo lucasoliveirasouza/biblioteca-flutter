@@ -1,5 +1,6 @@
 import 'package:biblioteca/componentes/row_table.dart';
 import 'package:biblioteca/models/livro.dart';
+import 'package:biblioteca/views/livro/livro_editar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +23,13 @@ class _LivroDetalhesViewState extends State<LivroDetalhesView> {
           PopupMenuButton(
               elevation: 20,
               enabled: true,
-              onSelected: (value) {},
+              onSelected: (value) {
+                if(value=="editar"){
+                  Get.to(()=> LivroEditarView(livro: widget.livro));
+                }else if(value == "deletar"){
+
+                }
+              },
               itemBuilder: (context) => [
                     PopupMenuItem(
                       child: Row(
@@ -93,6 +100,7 @@ class _LivroDetalhesViewState extends State<LivroDetalhesView> {
               title: "Autor:",
               valor: widget.livro.autor,
             ),
+
             SizedBox(
               height: 3,
             ),
