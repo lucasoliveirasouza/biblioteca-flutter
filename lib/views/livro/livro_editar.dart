@@ -198,7 +198,7 @@ class _LivroEditarViewState extends State<LivroEditarView> {
                     if (formKey.currentState!.validate()) {
                       Livro livro = Livro(widget.livro.id, titulo.text, autor.text, editora.text, int.parse(ano.text), isbn.text, imagem.text);
 
-                      Provider.of<LivroService>(context, listen: false).editarCategoria(livro,widget.livro.categoria);
+                      Provider.of<LivroService>(context, listen: false).editarLivro(livro,widget.livro.categoria);
                       Get.back();
                     }
                   },

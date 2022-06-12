@@ -1,8 +1,10 @@
 import 'package:biblioteca/componentes/row_table.dart';
 import 'package:biblioteca/models/livro.dart';
+import 'package:biblioteca/services/livro_service.dart';
 import 'package:biblioteca/views/livro/livro_editar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class LivroDetalhesView extends StatefulWidget {
   Livro livro;
@@ -27,7 +29,10 @@ class _LivroDetalhesViewState extends State<LivroDetalhesView> {
                 if(value=="editar"){
                   Get.to(()=> LivroEditarView(livro: widget.livro));
                 }else if(value == "deletar"){
+                  Livro livro = Livro(widget.livro.id, widget.livro.titulo, widget.livro.autor, widget.livro.editora, widget.livro.ano, widget.livro.isbn, widget.livro.imagem);
 
+                  Provider.of<LivroService>(context, listen: false).deletarLivro(livro,widget.livro.categoria);
+                  Get.back();
                 }
               },
               itemBuilder: (context) => [

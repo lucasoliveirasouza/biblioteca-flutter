@@ -60,7 +60,7 @@ class LivroService extends ChangeNotifier {
     return response;
   }
 
-  Future<http.Response> editarCategoria(Livro livro, Categoria categoria) async{
+  Future<http.Response> editarLivro(Livro livro, Categoria categoria) async{
     final cat = jsonEncode(<String, String>{
       'id': categoria.id,
       "descricao": categoria.descricao,
@@ -76,7 +76,6 @@ class LivroService extends ChangeNotifier {
         "ano": livro.ano.toString(),
         "autor": livro.autor,
         "editora": livro.editora,
-        "categoria": cat,
         "imagem": livro.imagem,
         "isbn": livro.isbn,
         "titulo": livro.titulo,
@@ -84,12 +83,40 @@ class LivroService extends ChangeNotifier {
     );
 
     _livros.forEach((element) {
-      if (element.id.toString() == livro.id) {
+
+      if (element.id == livro.id) {
         element.titulo = livro.titulo;
+        element.ano = livro.ano;
+        element.autor = livro.autor;
+        element.editora = livro.editora;
+        element.imagem = livro.imagem;
+        element.isbn = livro.isbn;
+        notifyListeners();
       }
     });
     notifyListeners();
 
+    return response;
+  }
+
+  Future<http.Response> deletarLivro(Livro livro, Categoria categoria) async {
+    final http.Response response = await http.delete(
+      Uri.parse("https://biblioteca-lucas.herokuapp.com/api/categoria/${categoria.id}/livro"),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(<String, String>{
+        'id': livro.id.toString(),
+        "ano": livro.ano.toString(),
+        "autor": livro.autor,
+        "editora": livro.editora,
+        "imagem": livro.imagem,
+        "isbn": livro.isbn,
+        "titulo": livro.titulo,
+      }),
+    );
+    _livros.removeWhere((element) => element.id == livro.id);
+    notifyListeners();
     return response;
   }
 }
