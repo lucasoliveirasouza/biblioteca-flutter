@@ -1,4 +1,7 @@
+import 'package:biblioteca/services/categoria_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class CategoriaCadatroView extends StatefulWidget {
   CategoriaCadatroView({Key? key}) : super(key: key);
@@ -49,7 +52,10 @@ class _CategoriaCadatroViewState extends State<CategoriaCadatroView> {
                 padding: EdgeInsets.only(right: 50, left: 50),
                 child: ElevatedButton(
                   onPressed: () {
-                    if (formKey.currentState!.validate()) {}
+                    if (formKey.currentState!.validate()) {
+                      Provider.of<CategoriaService>(context, listen: false).cadastrarCategoria(descricao.text);
+                      Get.back();
+                    }
                   },
                   child: Text(
                     "Salvar",
