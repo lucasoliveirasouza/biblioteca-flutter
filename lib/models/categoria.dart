@@ -1,6 +1,6 @@
 
 class Categoria{
-  late int _id;
+  late String _id;
   late String _descricao;
 
   Categoria(this._id, this._descricao);
@@ -11,9 +11,13 @@ class Categoria{
     _descricao = value;
   }
 
-  int get id => _id;
+  String get id => _id;
 
-  set id(int value) {
+  set id(String value) {
     _id = value;
   }
+
+  Map<String, dynamic> toJson() => {
+    'id': id, 'descricao': _descricao
+  };
 }

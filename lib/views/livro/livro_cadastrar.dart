@@ -1,4 +1,7 @@
+
+import 'package:biblioteca/componentes/easy_dropdown.dart';
 import 'package:biblioteca/models/livro.dart';
+import 'package:biblioteca/services/categoria_service.dart';
 import 'package:biblioteca/services/livro_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +22,8 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
   final ano = TextEditingController();
   final imagem = TextEditingController();
   final formKey = GlobalKey<FormState>();
-
+  String categoriaId = "";
+  String valor= "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,6 +141,26 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
               SizedBox(
                 height: 15,
               ),
+
+              ListTile(
+                contentPadding: EdgeInsets.only(bottom: 10),
+                subtitle: EasyDropdown(
+                  decoration: InputDecoration(
+                      labelText: "Categoria",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(new Radius.circular(10)),
+                      )),
+                  future: CategoriaService().getAll(),
+                  onSelect: (value) {
+                    categoriaId = value;
+                    valor = categoriaId;
+                  },
+                  initialValue: categoriaId,
+                  child: 'descricao',
+                  value: 'id',
+                ),
+              ),
+
               TextFormField(
                 controller: imagem,
                 keyboardType: TextInputType.text,
@@ -164,7 +188,7 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       Livro livro = Livro(0, titulo.text, autor.text, editora.text, int.parse(ano.text), isbn.text, imagem.text);
-                      Provider.of<LivroService>(context, listen: false).cadastrarLivro(livro, 2);
+                      Provider.of<LivroService>(context, listen: false).cadastrarLivro(livro, valor);
                       Get.back();
                     }
                   },

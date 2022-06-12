@@ -26,11 +26,31 @@ class CategoriaService extends ChangeNotifier {
       List<dynamic> listaCategorias = json;
 
       listaCategorias.forEach((categoria) {
-        Categoria c = Categoria(categoria["id"], categoria["descricao"]);
+        Categoria c = Categoria(categoria["id"].toString(), categoria["descricao"]);
         _categorias.add(c);
       });
       notifyListeners();
     }
+  }
+
+  Future<List<Categoria?>?> getAll() async {
+    List<Categoria> cts = [];
+    String uri = 'https://biblioteca-lucas.herokuapp.com/api/categorias';
+    final response = await http.get(Uri.parse(uri), headers: {
+      'Content-Type': 'application/json'
+    });
+
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      List<dynamic> listaCategorias = json;
+
+      listaCategorias.forEach((categoria) {
+        Categoria c = Categoria(categoria["id"].toString(), categoria["descricao"]);
+        cts.add(c);
+      });
+
+    }
+    return categorias;
   }
 
   Future<http.Response> cadastrarCategoria(String descricao) async{
@@ -44,7 +64,7 @@ class CategoriaService extends ChangeNotifier {
       }),
     );
 
-    _categorias.add(Categoria(0, descricao));
+    _categorias.add(Categoria("0", descricao));
     notifyListeners();
 
     return response;
