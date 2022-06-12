@@ -40,7 +40,7 @@ class _LivroListaViewState extends State<LivroListaView> {
                     lista[livro].titulo,
                     style: TextStyle(
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.bold
                     ),
                   ),
                   subtitle: Text(lista[livro].autor),

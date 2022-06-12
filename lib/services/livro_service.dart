@@ -10,7 +10,7 @@ class LivroService extends ChangeNotifier {
 
   UnmodifiableListView<Livro> get livros => UnmodifiableListView(_livros);
 
-  CategoriaService() {
+  LivroService() {
     _buscarLivros();
   }
 
@@ -37,6 +37,7 @@ class LivroService extends ChangeNotifier {
   }
 
   Future<http.Response> cadastrarLivro(Livro livro, String id) async{
+    print("https://biblioteca-lucas.herokuapp.com/api/categoria/${id}/livro");
     final http.Response response = await http.post(
       Uri.parse("https://biblioteca-lucas.herokuapp.com/api/categoria/${id}/livro"),
       headers: <String, String>{
