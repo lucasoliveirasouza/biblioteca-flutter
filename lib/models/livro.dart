@@ -1,4 +1,6 @@
-class Categoria {
+import 'categoria.dart';
+
+class Livro {
   late int _id;
   late String _titulo;
   late String _autor;
@@ -10,7 +12,7 @@ class Categoria {
   Categoria? categoria;
 
 
-  Categoria(this._id, this._titulo, this._autor, this._editora, this._ano,
+  Livro(this._id, this._titulo, this._autor, this._editora, this._ano,
       this._isbn, this._imagem);
 
 
