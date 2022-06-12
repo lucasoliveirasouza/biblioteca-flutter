@@ -1,7 +1,10 @@
 import 'package:biblioteca/componentes/easy_dropdown.dart';
 import 'package:biblioteca/models/livro.dart';
 import 'package:biblioteca/services/categoria_service.dart';
+import 'package:biblioteca/services/livro_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class LivroEditarView extends StatefulWidget {
   Livro livro;
@@ -193,7 +196,10 @@ class _LivroEditarViewState extends State<LivroEditarView> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
+                      Livro livro = Livro(widget.livro.id, titulo.text, autor.text, editora.text, int.parse(ano.text), isbn.text, imagem.text);
 
+                      Provider.of<LivroService>(context, listen: false).editarCategoria(livro,widget.livro.categoria);
+                      Get.back();
                     }
                   },
                   child: Text(

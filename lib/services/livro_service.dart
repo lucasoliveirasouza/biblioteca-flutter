@@ -60,9 +60,14 @@ class LivroService extends ChangeNotifier {
     return response;
   }
 
-  Future<http.Response> editarCategoria(Livro livro) async{
+  Future<http.Response> editarCategoria(Livro livro, Categoria categoria) async{
+    final cat = jsonEncode(<String, String>{
+      'id': categoria.id,
+      "descricao": categoria.descricao,
+    });
+
     final http.Response response = await http.put(
-      Uri.parse("https://biblioteca-lucas.herokuapp.com/api/categoria/${livro.categoria.id}/livro"),
+      Uri.parse("https://biblioteca-lucas.herokuapp.com/api/categoria/${categoria.id}/livro"),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -71,6 +76,7 @@ class LivroService extends ChangeNotifier {
         "ano": livro.ano.toString(),
         "autor": livro.autor,
         "editora": livro.editora,
+        "categoria": cat,
         "imagem": livro.imagem,
         "isbn": livro.isbn,
         "titulo": livro.titulo,
