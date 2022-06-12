@@ -35,15 +35,42 @@ class _MenuViewState extends State<MenuView> {
         onTap: mudarAba,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Image.asset(
+                "assets/images/book.png",
+                width: 23,
+                height: 23,
+              ),
+              activeIcon: Image.asset(
+                "assets/images/bookclick.png",
+                width: 28,
+                height: 28,
+              ),
               label: "Livros"
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.search),
+              icon: Image.asset(
+                "assets/images/books.png",
+                width: 25,
+                height: 25,
+              ),
+              activeIcon: Image.asset(
+                "assets/images/booksclick.png",
+                width: 28,
+                height: 28,
+              ),
               label: "Categorias"
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.grid_on),
+              icon: Image.asset(
+                "assets/images/about.png",
+                width: 22,
+                height: 22,
+              ),
+              activeIcon: Image.asset(
+                "assets/images/aboutclick.png",
+                width: 25,
+                height: 25,
+              ),
               label: "Sobre"
           ),
         ],
