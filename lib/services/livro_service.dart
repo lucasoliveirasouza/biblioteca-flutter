@@ -49,7 +49,6 @@ class LivroService extends ChangeNotifier {
       }),
     );
 
-
     _livros.add(livro);
     notifyListeners();
 
