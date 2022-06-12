@@ -27,6 +27,9 @@ class LivroService extends ChangeNotifier {
         Livro l = Livro(livro["id"], livro["titulo"], livro["autor"],
             livro["editora"], livro["ano"], livro["isbn"], livro["imagem"]);
 
+        l.categoria?.descricao = livro["categoria"]["descricao"];
+        l.categoria?.id = livro["categoria"]["id"];
+
         _livros.add(l);
       });
       notifyListeners();
