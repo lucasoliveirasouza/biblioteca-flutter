@@ -49,4 +49,20 @@ class CategoriaService extends ChangeNotifier {
 
     return response;
   }
+
+  Future<http.Response> deletarCategoria(String id,String descricao) async {
+    final http.Response response = await http.delete(
+      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/categoria'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(<String, String>{
+        'id': id,
+        'descricao': descricao,
+      }),
+    );
+    _categorias.removeWhere((element) => element.descricao == descricao);
+    notifyListeners();
+    return response;
+  }
 }

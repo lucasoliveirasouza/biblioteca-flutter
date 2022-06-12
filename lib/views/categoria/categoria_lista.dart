@@ -37,7 +37,13 @@ class _CategoriaListaViewState extends State<CategoriaListaView> {
                 child: ListTile(
                   title: Text(lista[categoria].descricao),
                   trailing: IconButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      Provider.of<CategoriaService>(context, listen: false)
+                          .deletarCategoria(
+                          lista[categoria].id.toString(),
+                          lista[categoria].descricao
+                      );
+                    },
                     icon: Icon(Icons.delete,),
                   ),
                 ),
