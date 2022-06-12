@@ -1,5 +1,8 @@
+import 'package:biblioteca/models/livro.dart';
+import 'package:biblioteca/services/livro_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class LivroCadastrarView extends StatefulWidget {
   LivroCadastrarView({Key? key}) : super(key: key);
@@ -160,7 +163,8 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      //Provider.of<CategoriaService>(context, listen: false).cadastrarCategoria(descricao.text);
+                      Livro livro = Livro(0, titulo.text, autor.text, editora.text, int.parse(ano.text), isbn.text, imagem.text);
+                      Provider.of<LivroService>(context, listen: false).cadastrarLivro(livro, 2);
                       Get.back();
                     }
                   },
