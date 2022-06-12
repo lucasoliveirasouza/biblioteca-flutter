@@ -1,6 +1,8 @@
 import 'package:biblioteca/models/categoria.dart';
 import 'package:biblioteca/services/categoria_service.dart';
+import 'package:biblioteca/views/categoria/categoria_cadastro.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class CategoriaListaView extends StatefulWidget {
@@ -16,6 +18,14 @@ class _CategoriaListaViewState extends State<CategoriaListaView> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Categorias"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+              onPressed: (){
+                Get.to(() => CategoriaCadatroView());
+              },
+          )
+        ],
       ),
       body: Consumer<CategoriaService>(
         builder: (context, repositorio, child) {
