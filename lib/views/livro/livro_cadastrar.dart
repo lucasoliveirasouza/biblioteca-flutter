@@ -1,8 +1,8 @@
 
+import 'package:biblioteca/componentes/easy_dropdown.dart';
 import 'package:biblioteca/models/livro.dart';
 import 'package:biblioteca/services/categoria_service.dart';
 import 'package:biblioteca/services/livro_service.dart';
-import 'package:biblioteca/views/componentes/easy_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

@@ -1,6 +1,7 @@
 import 'package:biblioteca/models/livro.dart';
 import 'package:biblioteca/services/livro_service.dart';
 import 'package:biblioteca/views/livro/livro_cadastrar.dart';
+import 'package:biblioteca/views/livro/livro_detalhes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class _LivroListaViewState extends State<LivroListaView> {
                   title: Text(
                     lista[livro].titulo,
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 19,
                       fontWeight: FontWeight.bold
                     ),
                   ),
@@ -50,7 +51,7 @@ class _LivroListaViewState extends State<LivroListaView> {
                     child: img.Image.network(lista[livro].imagem),
                   ),
                   onTap: () {
-                    //Get.to(()=> CategoriaEditarView(categoria: lista[categoria]));
+                    Get.to(()=> LivroDetalhesView(livro: lista[livro]));
                   },
                 ),
               );
