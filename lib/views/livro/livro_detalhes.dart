@@ -104,7 +104,7 @@ class _LivroDetalhesViewState extends State<LivroDetalhesView> {
               height: 3,
             ),
             RowTable(
-              title: "Autor:",
+              title: "Categoria:",
               valor: widget.livro.categoria.descricao,
             ),
             SizedBox(
