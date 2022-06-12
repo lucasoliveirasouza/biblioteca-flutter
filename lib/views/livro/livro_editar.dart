@@ -31,6 +31,7 @@ class _LivroEditarViewState extends State<LivroEditarView> {
     isbn.text = widget.livro.isbn;
     imagem.text = widget.livro.imagem;
     ano.text = widget.livro.ano.toString();
+    categoriaId = widget.livro.categoria.id;
     return Scaffold(
       appBar: AppBar(
         title: Text("Editar Livro"),

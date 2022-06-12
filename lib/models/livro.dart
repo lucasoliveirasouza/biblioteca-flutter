@@ -9,12 +9,18 @@ class Livro {
   late String _isbn;
   late String _imagem;
 
-  Categoria? categoria;
+  late Categoria _categoria;
 
 
   Livro(this._id, this._titulo, this._autor, this._editora, this._ano,
       this._isbn, this._imagem);
 
+
+  Categoria get categoria => _categoria;
+
+  void setCategoria(Categoria value) {
+    _categoria = value;
+  }
 
   String get imagem => _imagem;
 
