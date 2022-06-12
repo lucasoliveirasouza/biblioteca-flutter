@@ -65,4 +65,28 @@ class CategoriaService extends ChangeNotifier {
     notifyListeners();
     return response;
   }
+
+  Future<http.Response> editarCategoria(String id, String descricao) async{
+    final http.Response response = await http.put(
+      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/categoria'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(<String, String>{
+        'id': id,
+        'descricao': descricao,
+      }),
+    );
+
+    _categorias.forEach((element) {
+      if (element.id.toString() == id) {
+        element.descricao = descricao;
+      }
+    });
+    notifyListeners();
+
+    return response;
+  }
+
+
 }

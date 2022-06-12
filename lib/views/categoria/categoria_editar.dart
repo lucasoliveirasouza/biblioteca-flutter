@@ -1,9 +1,12 @@
 import 'package:biblioteca/models/categoria.dart';
+import 'package:biblioteca/services/categoria_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class CategoriaEditarView extends StatefulWidget {
   Categoria categoria;
+
   CategoriaEditarView({Key? key, required this.categoria}) : super(key: key);
 
   @override
@@ -13,7 +16,6 @@ class CategoriaEditarView extends StatefulWidget {
 class _CategoriaEditarViewState extends State<CategoriaEditarView> {
   final descricao = TextEditingController();
   final formKey = GlobalKey<FormState>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,9 @@ class _CategoriaEditarViewState extends State<CategoriaEditarView> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      //Provider.of<CategoriaService>(context, listen: false).cadastrarCategoria(descricao.text);
+                      Provider.of<CategoriaService>(context, listen: false)
+                          .editarCategoria(
+                              widget.categoria.id.toString(), descricao.text);
                       Get.back();
                     }
                   },
