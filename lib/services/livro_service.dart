@@ -38,7 +38,7 @@ class LivroService extends ChangeNotifier {
   }
 
   Future<http.Response> cadastrarLivro(Livro livro, String id) async{
-    print("https://biblioteca-lucas.herokuapp.com/api/categoria/${id}/livro");
+    //print("https://biblioteca-lucas.herokuapp.com/api/categoria/${id}/livro");
     final http.Response response = await http.post(
       Uri.parse("https://biblioteca-lucas.herokuapp.com/api/categoria/${id}/livro"),
       headers: <String, String>{
@@ -55,6 +55,33 @@ class LivroService extends ChangeNotifier {
     );
 
     _livros.add(livro);
+    notifyListeners();
+
+    return response;
+  }
+
+  Future<http.Response> editarCategoria(Livro livro) async{
+    final http.Response response = await http.put(
+      Uri.parse("https://biblioteca-lucas.herokuapp.com/api/categoria/${livro.categoria.id}/livro"),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(<String, String>{
+        'id': livro.id.toString(),
+        "ano": livro.ano.toString(),
+        "autor": livro.autor,
+        "editora": livro.editora,
+        "imagem": livro.imagem,
+        "isbn": livro.isbn,
+        "titulo": livro.titulo,
+      }),
+    );
+
+    _livros.forEach((element) {
+      if (element.id.toString() == livro.id) {
+        element.titulo = livro.titulo;
+      }
+    });
     notifyListeners();
 
     return response;
