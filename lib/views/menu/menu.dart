@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+class MenuView extends StatefulWidget {
+  const MenuView({Key? key}) : super(key: key);
 
   @override
-  _HomeViewState createState() => _HomeViewState();
+  _MenuViewState createState() => _MenuViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _MenuViewState extends State<MenuView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
