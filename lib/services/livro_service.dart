@@ -32,4 +32,21 @@ class LivroService extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<http.Response> cadastrarCategoria(String descricao) async{
+    final http.Response response = await http.post(
+      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/categoria'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(<String, String>{
+        'descricao': descricao,
+      }),
+    );
+
+    _categorias.add(Categoria(0, descricao));
+    notifyListeners();
+
+    return response;
+  }
 }
