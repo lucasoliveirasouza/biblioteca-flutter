@@ -22,9 +22,9 @@ class _CategoriaListaViewState extends State<CategoriaListaView> {
         actions: [
           IconButton(
             icon: Icon(Icons.add),
-              onPressed: (){
-                Get.to(() => CategoriaCadatroView());
-              },
+            onPressed: () {
+              Get.to(() => CategoriaCadatroView());
+            },
           )
         ],
       ),
@@ -38,18 +38,13 @@ class _CategoriaListaViewState extends State<CategoriaListaView> {
                 child: ListTile(
                   title: Text(lista[categoria].descricao),
                   trailing: IconButton(
-                    onPressed: (){
-                      Provider.of<CategoriaService>(context, listen: false)
-                          .deletarCategoria(
-                          lista[categoria].id.toString(),
-                          lista[categoria].descricao
-                      );
+                    onPressed: () {
+                      Get.to(() => CategoriaEditarView(categoria: lista[categoria]));
                     },
-                    icon: Icon(Icons.delete,),
+                    icon: Icon(
+                      Icons.edit,
+                    ),
                   ),
-                  onTap: (){
-                    Get.to(()=> CategoriaEditarView(categoria: lista[categoria]));
-                  },
                 ),
               );
             },

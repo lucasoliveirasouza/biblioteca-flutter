@@ -29,10 +29,8 @@ class _LivroDetalhesViewState extends State<LivroDetalhesView> {
                 if(value=="editar"){
                   Get.to(()=> LivroEditarView(livro: widget.livro));
                 }else if(value == "deletar"){
-                  Livro livro = Livro(widget.livro.id, widget.livro.titulo, widget.livro.autor, widget.livro.editora, widget.livro.ano, widget.livro.isbn, widget.livro.imagem);
+                  deletar();
 
-                  Provider.of<LivroService>(context, listen: false).deletarLivro(livro,widget.livro.categoria);
-                  Get.back();
                 }
               },
               itemBuilder: (context) => [
@@ -139,6 +137,30 @@ class _LivroDetalhesViewState extends State<LivroDetalhesView> {
           ],
         ),
       ),
+    );
+  }
+
+  deletar(){
+    Get.defaultDialog(
+        title: "Deseja excluir?",
+        titleStyle: TextStyle(color: Colors.green),
+        middleTextStyle: TextStyle(color: Colors.white),
+        onConfirm: () {
+          Livro livro = Livro(widget.livro.id, widget.livro.titulo, widget.livro.autor, widget.livro.editora, widget.livro.ano, widget.livro.isbn, widget.livro.imagem);
+
+          Provider.of<LivroService>(context, listen: false).deletarLivro(livro,widget.livro.categoria);
+          Get.close(0);
+          Get.back();
+        },
+        textConfirm: "Confirmar",
+        textCancel: "Cancelar",
+        cancelTextColor: Colors.green,
+        confirmTextColor: Colors.white,
+        buttonColor: Colors.green,
+        radius: 1,
+        content: Column(
+          children: [],
+        ),
     );
   }
 }

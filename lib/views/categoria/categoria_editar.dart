@@ -23,6 +23,38 @@ class _CategoriaEditarViewState extends State<CategoriaEditarView> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Editar Categoria"),
+        actions: [
+          PopupMenuButton(
+              elevation: 20,
+              enabled: true,
+              onSelected: (value) {
+                deletar();
+
+              },
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.delete,
+                        color: Colors.grey.shade500,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        "Deletar",
+                        style: TextStyle(
+                          color: Colors.grey.shade700,
+                        ),
+                      )
+                    ],
+                  ),
+                  value: "deletar",
+                ),
+              ]),
+
+        ],
       ),
       body: Form(
         key: formKey,
@@ -72,6 +104,29 @@ class _CategoriaEditarViewState extends State<CategoriaEditarView> {
             ],
           ),
         ),
+      ),
+    );
+  }
+  deletar(){
+    Get.defaultDialog(
+      title: "Deseja deletar essa categoria?",
+      titleStyle: TextStyle(color: Colors.green),
+      middleTextStyle: TextStyle(color: Colors.white),
+      onConfirm: () {
+        Provider.of<CategoriaService>(context, listen: false)
+            .deletarCategoria(widget.categoria.id.toString(),
+            widget.categoria.descricao);
+        Get.close(0);
+        Get.back();
+      },
+      textConfirm: "Confirmar",
+      textCancel: "Cancelar",
+      cancelTextColor: Colors.green,
+      confirmTextColor: Colors.white,
+      buttonColor: Colors.green,
+      radius: 1,
+      content: Column(
+        children: [],
       ),
     );
   }
