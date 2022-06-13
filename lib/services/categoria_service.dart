@@ -55,7 +55,7 @@ class CategoriaService extends ChangeNotifier {
     return categorias;
   }
 
-  Future<List<Livro?>?> getLivros(Categoria categoria) async {
+  Future<List<Livro>> getLivros(Categoria categoria) async {
     List<Livro> lv = [];
     String uri = 'https://biblioteca-lucas.herokuapp.com/api/categoria/${categoria.id}/livros';
     final response = await http
