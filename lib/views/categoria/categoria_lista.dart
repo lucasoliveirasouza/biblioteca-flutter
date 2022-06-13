@@ -2,6 +2,7 @@ import 'package:biblioteca/models/categoria.dart';
 import 'package:biblioteca/services/categoria_service.dart';
 import 'package:biblioteca/views/categoria/categoria_cadastro.dart';
 import 'package:biblioteca/views/categoria/categoria_editar.dart';
+import 'package:biblioteca/views/categoria/categoria_livros.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -45,6 +46,9 @@ class _CategoriaListaViewState extends State<CategoriaListaView> {
                       Icons.edit,
                     ),
                   ),
+                  onTap: (){
+                    Get.to(()=> CategoriaLivrosView(categoria: lista[categoria]));
+                  },
                 ),
               );
             },
