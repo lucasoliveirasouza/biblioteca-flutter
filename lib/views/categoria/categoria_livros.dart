@@ -48,6 +48,7 @@ class _CategoriaLivrosViewState extends State<CategoriaLivrosView> {
                             subtitle: Text(snapshot.data![index].autor),
                             onTap: () {
                               Get.to(()=> LivroDetalhesView(livro: snapshot.data![index]));
+
                             },
                           ),
                         );
