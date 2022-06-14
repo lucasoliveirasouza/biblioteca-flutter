@@ -13,7 +13,7 @@
 <img align="center" title="Flutter" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg"> <img align="center" title="Heroku" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/heroku/heroku-original.svg">
 
 ### Descrição:
-Aplicativo Flutter criado para consumir API construída em Spring Boot. Com ele, é possível listar, criar, editar e deletar Categorias e Livros. A API Consumida pelo aplicativo pode ser encontrada no seguinte repositório: [https://github.com/lucasoliveirasouza/produtos-api](https://github.com/lucasoliveirasouza/biblioteca-API)
+Aplicativo Flutter criado para consumir API construída em Spring Boot. Com ele, é possível listar, criar, editar e deletar Categorias de livros e Livros. A API Consumida pelo aplicativo pode ser encontrada no seguinte repositório: [https://github.com/lucasoliveirasouza/produtos-api](https://github.com/lucasoliveirasouza/biblioteca-API)
 
 <div align="center">
   
