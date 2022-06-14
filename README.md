@@ -17,7 +17,6 @@ Aplicativo Flutter criado para consumir API construída em Spring Boot. Com ele,
 
 <div align="center">
   
-![Screenrecorder-2022-06-13-20-32-34-39 (1)](https://user-images.githubusercontent.com/26170686/173464428-bdada7c0-b31c-402d-a812-3a937ffbd8d7.gif)
   
 <div>
 
