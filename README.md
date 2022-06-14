@@ -14,6 +14,7 @@
 
 #### Descrição:
 Aplicativo Flutter criado para consumir API construída em Spring Boot. Com ele, é possível listar, criar, editar e deletar **Categoria** de livros e também realizar o CRUD de **Livro**. <br>
+
 Como projeto fututo, serão implementados as entidades Autor e Editora. Também será adicionado o Spring Security.
 
 #### O Aplicativo:
