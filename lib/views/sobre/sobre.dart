@@ -14,6 +14,50 @@ class _SobreViewState extends State<SobreView> {
       appBar: AppBar(
         title: Text("Sobre"),
       ),
+      body: Container(
+        padding: EdgeInsets.all(20),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Biblioteca-Flutter",
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Versão 1.0.0",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 120,
+                child: Image.asset("assets/images/booksclick.png"),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Desenvolvido por Lucas Souza",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
