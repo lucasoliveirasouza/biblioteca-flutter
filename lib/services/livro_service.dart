@@ -54,7 +54,8 @@ class LivroService extends ChangeNotifier {
       }),
     );
 
-    _livros.add(livro);
+    _livros.clear();
+    _buscarLivros();
     notifyListeners();
 
     return response;
@@ -82,18 +83,8 @@ class LivroService extends ChangeNotifier {
       }),
     );
 
-    _livros.forEach((element) {
-
-      if (element.id == livro.id) {
-        element.titulo = livro.titulo;
-        element.ano = livro.ano;
-        element.autor = livro.autor;
-        element.editora = livro.editora;
-        element.imagem = livro.imagem;
-        element.isbn = livro.isbn;
-        notifyListeners();
-      }
-    });
+    _livros.clear();
+    _buscarLivros();
     notifyListeners();
 
     return response;
@@ -115,7 +106,8 @@ class LivroService extends ChangeNotifier {
         "titulo": livro.titulo,
       }),
     );
-    _livros.removeWhere((element) => element.id == livro.id);
+    _livros.clear();
+    _buscarLivros();
     notifyListeners();
     return response;
   }

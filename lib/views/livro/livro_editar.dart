@@ -151,9 +151,7 @@ class _LivroEditarViewState extends State<LivroEditarView> {
                 height: 15,
               ),
 
-              ListTile(
-                contentPadding: EdgeInsets.only(bottom: 10),
-                subtitle: EasyDropdown(
+              EasyDropdown(
                   decoration: InputDecoration(
                       labelText: "Categoria",
                       border: OutlineInputBorder(
@@ -168,8 +166,10 @@ class _LivroEditarViewState extends State<LivroEditarView> {
                   child: 'descricao',
                   value: 'id',
                 ),
-              ),
 
+              SizedBox(
+                height: 15,
+              ),
               TextFormField(
                 controller: imagem,
                 keyboardType: TextInputType.text,
