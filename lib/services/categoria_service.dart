@@ -88,7 +88,8 @@ class CategoriaService extends ChangeNotifier {
       }),
     );
 
-    _categorias.add(Categoria("0", descricao));
+    _categorias.clear();
+    _buscarCategorias();
     notifyListeners();
 
     return response;
@@ -105,7 +106,8 @@ class CategoriaService extends ChangeNotifier {
         'descricao': descricao,
       }),
     );
-    _categorias.removeWhere((element) => element.descricao == descricao);
+    _categorias.clear();
+    _buscarCategorias();
     notifyListeners();
     return response;
   }
@@ -122,11 +124,8 @@ class CategoriaService extends ChangeNotifier {
       }),
     );
 
-    _categorias.forEach((element) {
-      if (element.id.toString() == id) {
-        element.descricao = descricao;
-      }
-    });
+    _categorias.clear();
+    _buscarCategorias();
     notifyListeners();
 
     return response;
