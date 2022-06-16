@@ -37,15 +37,7 @@ class _CategoriaListaViewState extends State<CategoriaListaView> {
               final List<Categoria> lista = repositorio.categorias;
               return Card(
                 child: ListTile(
-                  title: Text(lista[categoria].descricao),
-                  trailing: IconButton(
-                    onPressed: () {
-                      Get.to(() => CategoriaEditarView(categoria: lista[categoria]));
-                    },
-                    icon: Icon(
-                      Icons.edit,
-                    ),
-                  ),
+                  title: Center(child: Text(lista[categoria].descricao)),
                   onTap: (){
                     Get.to(()=> CategoriaLivrosView(categoria: lista[categoria]));
                   },
