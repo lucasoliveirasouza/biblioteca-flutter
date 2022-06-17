@@ -1,3 +1,5 @@
+import 'package:biblioteca/models/editora.dart';
+
 import 'categoria.dart';
 
 class Livro {
@@ -10,6 +12,7 @@ class Livro {
   late String _imagem;
 
   late Categoria _categoria;
+
 
 
   Livro(this._id, this._titulo, this._autor, this._editora, this._ano,

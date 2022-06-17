@@ -1,5 +1,6 @@
 
 import 'package:biblioteca/services/categoria_service.dart';
+import 'package:biblioteca/services/editora_service.dart';
 import 'package:biblioteca/services/livro_service.dart';
 import 'package:biblioteca/views/menu/menu.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ void main() {
     providers: [
       ChangeNotifierProvider(create: (context) => CategoriaService()),
       ChangeNotifierProvider(create: (context) => LivroService()),
+      ChangeNotifierProvider(create: (context) => EditoraService()),
     ],
     child: MyApp(),
   ));
