@@ -3,6 +3,8 @@ import 'package:biblioteca/views/livro/livro_lista.dart';
 import 'package:biblioteca/views/sobre/sobre.dart';
 import 'package:flutter/material.dart';
 
+import 'geral.dart';
+
 class MenuView extends StatefulWidget {
   const MenuView({Key? key}) : super(key: key);
 
@@ -15,7 +17,7 @@ class _MenuViewState extends State<MenuView> {
 
   final List<Widget> _telas = [
     LivroListaView(),
-    CategoriaListaView(),
+    GeralView(),
     SobreView(),
   ];
 
@@ -58,7 +60,7 @@ class _MenuViewState extends State<MenuView> {
                 width: 28,
                 height: 28,
               ),
-              label: "Categorias"
+              label: "Geral"
           ),
           BottomNavigationBarItem(
               icon: Image.asset(
