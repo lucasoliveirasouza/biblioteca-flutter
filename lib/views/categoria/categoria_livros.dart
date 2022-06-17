@@ -122,8 +122,7 @@ class _CategoriaLivrosViewState extends State<CategoriaLivrosView> {
       middleTextStyle: TextStyle(color: Colors.white),
       onConfirm: () {
         Provider.of<CategoriaService>(context, listen: false)
-            .deletarCategoria(widget.categoria.id.toString(),
-            widget.categoria.descricao);
+            .deletarCategoria(widget.categoria.id.toString());
         Get.close(0);
         Get.back();
       },

@@ -28,13 +28,6 @@ class _GeralViewState extends State<GeralView> {
                   "Autores",
                 ),
                 subtitle: Text("Todos autores disponíveis"),
-                trailing: Text(
-                  Provider.of<CategoriaService>(context, listen: false).categorias.length.toString(),
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
               ),
             ),
             Card(
@@ -43,13 +36,6 @@ class _GeralViewState extends State<GeralView> {
                     "Categoria",
                 ),
                 subtitle: Text("Todas categorias disponíveis"),
-                trailing: Text(
-                  Provider.of<CategoriaService>(context, listen: false).categorias.length.toString(),
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
                 onTap: (){
                   Get.to(()=> CategoriaListaView());
                 },
@@ -62,13 +48,6 @@ class _GeralViewState extends State<GeralView> {
                   "Editora",
                 ),
                 subtitle: Text("Todas editoras disponíveis"),
-                trailing: Text(
-                  Provider.of<CategoriaService>(context, listen: false).categorias.length.toString(),
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
               ),
             ),
           ],
