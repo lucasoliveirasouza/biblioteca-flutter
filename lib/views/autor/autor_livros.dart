@@ -1,5 +1,6 @@
 import 'package:biblioteca/models/autor.dart';
 import 'package:biblioteca/services/autor_service.dart';
+import 'package:biblioteca/views/autor/autor_editar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ class _AutorLivrosViewState extends State<AutorLivrosView> {
               enabled: true,
               onSelected: (value) {
                 if(value=="editar"){
-                  //Get.to(()=> CategoriaEditarView(categoria: widget.categoria));
+                  Get.to(()=> AutorEditarView(autor: widget.autor));
                 }else if(value == "deletar"){
                   deletar();
 

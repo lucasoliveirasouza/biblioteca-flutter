@@ -1,6 +1,7 @@
 import 'package:biblioteca/models/autor.dart';
 import 'package:biblioteca/services/autor_service.dart';
 import 'package:biblioteca/views/autor/autor_cadastrar.dart';
+import 'package:biblioteca/views/autor/autor_livros.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +38,7 @@ class _AutorListaViewState extends State<AutorListaView> {
                 child: ListTile(
                   title: Center(child: Text(lista[autor].nome)),
                   onTap: (){
-                    //Get.to(()=> EditoraLivrosView(editora: lista[editora]));
+                    Get.to(()=> AutorLivrosView(autor: lista[autor]));
                   },
                 ),
               );
