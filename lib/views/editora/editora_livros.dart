@@ -1,6 +1,8 @@
 import 'package:biblioteca/models/editora.dart';
+import 'package:biblioteca/models/livro.dart';
 import 'package:biblioteca/services/editora_service.dart';
 import 'package:biblioteca/views/editora/editora_editar.dart';
+import 'package:biblioteca/views/livro/livro_detalhes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +20,10 @@ class _EditoraLivrosViewState extends State<EditoraLivrosView> {
 
   @override
   Widget build(BuildContext context) {
+    Future<List<Livro>> futureList =
+    Provider.of<EditoraService>(context, listen: false)
+        .getLivros(widget.editora);
+
     Editora editora = widget.editora;
     Provider.of<EditoraService>(context).editoras.forEach((element) {
       if(element.id == widget.editora.id){
@@ -82,6 +88,37 @@ class _EditoraLivrosViewState extends State<EditoraLivrosView> {
                 ),
               ])
         ],
+      ),
+
+      body: Container(
+        padding: EdgeInsets.only(right: 10, left: 10),
+        child: FutureBuilder(
+            future: futureList,
+            builder: (BuildContext context,
+                AsyncSnapshot<List<Livro>> snapshot) {
+              return ListView.builder(
+                  itemCount: snapshot.data?.length ?? 0,
+                  shrinkWrap: true,
+                  itemBuilder: ((context, index) {
+
+                    return Card(
+                      child: ListTile(
+                        leading: SizedBox(
+                          height: 80,
+                          width: 80,
+                          child: Image.network(snapshot.data![index].imagem),
+                        ),
+                        title: Text(snapshot.data![index].titulo),
+                        subtitle: Text(snapshot.data![index].autor.nome),
+                        onTap: () {
+                          Get.to(()=> LivroDetalhesView(livro: snapshot.data![index]));
+
+                        },
+                      ),
+                    );
+                  }));
+            }
+        ),
       ),
     );
   }

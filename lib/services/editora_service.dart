@@ -1,6 +1,9 @@
 import 'dart:collection';
 import 'dart:convert';
+import 'package:biblioteca/models/autor.dart';
+import 'package:biblioteca/models/categoria.dart';
 import 'package:biblioteca/models/editora.dart';
+import 'package:biblioteca/models/livro.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -50,6 +53,34 @@ class EditoraService extends ChangeNotifier {
 
     }
     return edt;
+  }
+
+  Future<List<Livro>> getLivros(Editora editora) async {
+    List<Livro> lv = [];
+    String uri = 'https://biblioteca-lucas.herokuapp.com/api/editora/${editora.id}/livros';
+    final response = await http
+        .get(Uri.parse(uri), headers: {'Content-Type': 'application/json'});
+
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      List<dynamic> listaLivros = json;
+
+      listaLivros.forEach((livro) {
+        Livro l = Livro(livro["id"], livro["titulo"],livro["ano"], livro["isbn"], livro["imagem"]);
+
+        Categoria c = Categoria(livro["categoria"]["id"].toString(), livro["categoria"]["descricao"]);
+        l.setCategoria(c);
+
+        Editora e = Editora(livro["editora"]["id"].toString(), livro["editora"]["nome"]);
+        l.setEditora(e);
+
+        Autor a = Autor(livro["autor"]["id"].toString(), livro["autor"]["nome"]);
+        l.setAutor(a);
+
+        lv.add(l);
+      });
+    }
+    return lv;
   }
 
   Future<http.Response> cadastrarEditora(String nome) async{
