@@ -1,7 +1,9 @@
 import 'package:biblioteca/models/autor.dart';
+import 'package:biblioteca/models/livro.dart';
 import 'package:biblioteca/services/autor_service.dart';
 import 'package:biblioteca/services/livro_service.dart';
 import 'package:biblioteca/views/autor/autor_editar.dart';
+import 'package:biblioteca/views/livro/livro_detalhes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +20,11 @@ class _AutorLivrosViewState extends State<AutorLivrosView> {
 
   @override
   Widget build(BuildContext context) {
+
+    Future<List<Livro>> futureList =
+    Provider.of<AutorService>(context, listen: false)
+        .getLivros(widget.autor);
+
     Autor autor = widget.autor;
     Provider.of<AutorService>(context).autores.forEach((element) {
       if(element.id == widget.autor.id){
@@ -82,6 +89,36 @@ class _AutorLivrosViewState extends State<AutorLivrosView> {
                 ),
               ])
         ],
+      ),
+      body: Container(
+        padding: EdgeInsets.only(right: 10, left: 10),
+        child: FutureBuilder(
+            future: futureList,
+            builder: (BuildContext context,
+                AsyncSnapshot<List<Livro>> snapshot) {
+              return ListView.builder(
+                  itemCount: snapshot.data?.length ?? 0,
+                  shrinkWrap: true,
+                  itemBuilder: ((context, index) {
+
+                    return Card(
+                      child: ListTile(
+                        leading: SizedBox(
+                          height: 80,
+                          width: 80,
+                          child: Image.network(snapshot.data![index].imagem),
+                        ),
+                        title: Text(snapshot.data![index].titulo),
+                        subtitle: Text(snapshot.data![index].autor.nome),
+                        onTap: () {
+                          Get.to(()=> LivroDetalhesView(livro: snapshot.data![index]));
+
+                        },
+                      ),
+                    );
+                  }));
+            }
+        ),
       ),
     );
   }
