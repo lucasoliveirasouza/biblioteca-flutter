@@ -1,3 +1,4 @@
+import 'package:biblioteca/componentes/form_field_padrao.dart';
 import 'package:biblioteca/services/autor_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,23 +27,9 @@ class _AutorCadastrarViewState extends State<AutorCadastrarView> {
           padding: EdgeInsets.only(right: 20, top: 20, left: 20),
           child: ListView(
             children: [
-              TextFormField(
-                controller: nome,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  label: Text("Nome"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      new Radius.circular(10.0),
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Informe o nome do autor";
-                  }
-                  return null;
-                },
+              FormFieldPadrao(
+                controle: nome,
+                title: "Nome",
               ),
               SizedBox(
                 height: 15,
@@ -57,10 +44,8 @@ class _AutorCadastrarViewState extends State<AutorCadastrarView> {
                           .cadastrarAutor(nome.text)
                           .then((value) => {
                                 Get.snackbar(
-                                  "Cadastro de autor",
-                                  value.toString(),
-                                  backgroundColor: Colors.green.shade50
-                                )
+                                    "Cadastro de autor", value.toString(),
+                                    backgroundColor: Colors.green.shade50)
                               });
                       Navigator.of(context).pop();
                     }
