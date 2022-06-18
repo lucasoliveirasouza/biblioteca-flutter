@@ -83,7 +83,7 @@ class EditoraService extends ChangeNotifier {
     return lv;
   }
 
-  Future<http.Response> cadastrarEditora(String nome) async{
+  Future<String> cadastrarEditora(String nome) async{
     final http.Response response = await http.post(
       Uri.parse('https://biblioteca-lucas.herokuapp.com/api/editora'),
       headers: <String, String>{
@@ -101,9 +101,35 @@ class EditoraService extends ChangeNotifier {
       Editora edit = Editora(editora["id"].toString(), editora["nome"]);
       _editoras.add(edit);
       notifyListeners();
+      return "Cadatrado com sucesso";
+    }else{
+      return "Não foi possível realizar o cadastro";
     }
+  }
 
-    return response;
+  Future<String> editarEditora(String id, String nome) async{
+    final http.Response response = await http.put(
+      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/editora'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(<String, String>{
+        'id': id,
+        'nome': nome,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      _editoras.forEach((element) {
+        if (element.id == id) {
+          element.nome = nome;
+          notifyListeners();
+        }
+      });
+      return "Editado com sucesso";
+    }else{
+      return "Não foi possível editar";
+    }
   }
 
   Future<http.Response> deletarEditora(String id) async {
@@ -118,28 +144,5 @@ class EditoraService extends ChangeNotifier {
     notifyListeners();
     return response;
   }
-
-  Future<http.Response> editarEditora(String id, String nome) async{
-    final http.Response response = await http.put(
-      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/editora'),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode(<String, String>{
-        'id': id,
-        'nome': nome,
-      }),
-    );
-
-    _editoras.forEach((element) {
-      if (element.id == id) {
-        element.nome = nome;
-        notifyListeners();
-      }
-    });
-
-    return response;
-  }
-
 
 }
