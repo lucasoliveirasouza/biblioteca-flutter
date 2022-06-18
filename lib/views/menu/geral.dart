@@ -19,7 +19,7 @@ class _GeralViewState extends State<GeralView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Itens Gerais"),
+        title: Text("Geral"),
       ),
       body:Container(
     child: GridView.count(
