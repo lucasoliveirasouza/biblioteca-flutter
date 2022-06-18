@@ -1,11 +1,9 @@
-
-
-
-import 'package:biblioteca/models/autor.dart';
+import 'package:biblioteca/models/IModel.dart';
+import 'package:flutter/Material.dart';
 import 'package:flutter/material.dart';
 
-class DropdownAutor extends StatefulWidget {
-  Future<List<Autor?>?> future;
+class DropdownPadrao<T extends IModel> extends StatefulWidget {
+  Future<List<T?>?> future;
   String initialValue;
   String child;
   String nome;
@@ -14,7 +12,7 @@ class DropdownAutor extends StatefulWidget {
   ValueChanged? onTap;
   Function(String)? onSelect;
 
-  DropdownAutor(
+  DropdownPadrao(
       {Key? key,
         required this.future,
         required this.initialValue,
@@ -22,23 +20,23 @@ class DropdownAutor extends StatefulWidget {
         required this.value,
         required this.nome,
         this.onSelect,
-        this.onTap,
-        this.childList})
+        this.onTap})
       : super(key: key);
 
   @override
-  State<DropdownAutor> createState() => _DropdownAutorState();
+  State<DropdownPadrao> createState() => _DropdownPadraoState<T>();
 }
 
-class _DropdownAutorState
-    extends State<DropdownAutor> {
+class _DropdownPadraoState<T extends IModel>
+    extends State<DropdownPadrao> {
   @override
   dynamic get(String propriedade) {}
 
   Widget build(BuildContext context) {
+    debugPrint('=-------------');
 
-    return FutureBuilder<List<Autor?>?>(
-      future: widget.future as Future<List<Autor?>?>,
+    return FutureBuilder<List<T?>?>(
+      future: widget.future as Future<List<T?>?>,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Text('Sem dados');
@@ -60,19 +58,8 @@ class _DropdownAutorState
             icon: Icon(null),
             value: widget.initialValue,
             items: snapshot.data?.map((e) {
-              String childListText = "";
-              int cont = 0;
-              widget.childList?.forEach((element) {
-                String separador =
-                (cont < widget.childList!.length.toInt() ? " >>> " : '');
-                childListText += e?.toJson()[element] + separador;
-                cont++;
-              });
-
               return DropdownMenuItem<String>(
-                child: widget.childList?.isEmpty ?? true
-                    ? Text(e?.toJson()[widget.child])
-                    : Text(childListText),
+                child: Text(e?.toJson()[widget.child]),
                 value: e?.toJson()[widget.value],
               );
             }).toList(),

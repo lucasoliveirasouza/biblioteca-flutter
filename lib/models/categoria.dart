@@ -1,5 +1,7 @@
 
-class Categoria{
+import 'package:biblioteca/models/IModel.dart';
+
+class Categoria extends IModel{
   late String _id;
   late String _descricao;
 

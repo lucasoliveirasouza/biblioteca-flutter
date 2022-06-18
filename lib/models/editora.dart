@@ -1,4 +1,6 @@
-class Editora {
+import 'package:biblioteca/models/IModel.dart';
+
+class Editora extends IModel{
   late String _id;
   late String _nome;
 

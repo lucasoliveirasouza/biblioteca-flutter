@@ -1,7 +1,8 @@
-import 'package:biblioteca/componentes/dropdown_autor.dart';
-import 'package:biblioteca/componentes/dropdown_categoria.dart';
-import 'package:biblioteca/componentes/dropdown_editora.dart';
+import 'package:biblioteca/componentes/dropdown_padrao.dart';
 import 'package:biblioteca/componentes/form_field_padrao.dart';
+import 'package:biblioteca/models/autor.dart';
+import 'package:biblioteca/models/categoria.dart';
+import 'package:biblioteca/models/editora.dart';
 import 'package:biblioteca/models/livro.dart';
 import 'package:biblioteca/services/autor_service.dart';
 import 'package:biblioteca/services/categoria_service.dart';
@@ -50,7 +51,7 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
               SizedBox(
                 height: 15,
               ),
-              DropdownAutor(
+              DropdownPadrao<Autor>(
                 nome: "Autor",
                 future: AutorService().getAll(),
                 onSelect: (value) {
@@ -64,7 +65,7 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
               SizedBox(
                 height: 15,
               ),
-              DropdownEditora(
+              DropdownPadrao<Editora>(
                 nome: "Editora",
                 future: EditoraService().getAll(),
                 onSelect: (value) {
@@ -92,7 +93,7 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
               SizedBox(
                 height: 15,
               ),
-              DropdownCategoria(
+              DropdownPadrao<Categoria>(
                 nome: "Categoria",
                 future: CategoriaService().getAll(),
                 onSelect: (value) {

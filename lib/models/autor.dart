@@ -1,4 +1,6 @@
-class Autor{
+import 'package:biblioteca/models/IModel.dart';
+
+class Autor extends IModel{
   late String _id;
   late String _nome;
 
