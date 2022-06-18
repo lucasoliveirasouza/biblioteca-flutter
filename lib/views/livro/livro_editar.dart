@@ -46,7 +46,6 @@ class _LivroEditarViewState extends State<LivroEditarView> {
     id_editora = widget.livro.editora.id;
     id_autor = widget.livro.autor.id;
 
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Editar Livro"),
@@ -78,41 +77,39 @@ class _LivroEditarViewState extends State<LivroEditarView> {
               SizedBox(
                 height: 15,
               ),
-               DropdownAutor(
-                  decoration: InputDecoration(
-                      labelText: "Autor",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(new Radius.circular(10)),
-                      )),
-                  future: AutorService().getAll(),
-                  onSelect: (value) {
-                    autorId = value;
-                    id_autor = autorId;
-                  },
-                  initialValue: autorId,
-                  child: 'nome',
-                  value: 'id',
-             ),
-
+              DropdownAutor(
+                decoration: InputDecoration(
+                    labelText: "Autor",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(new Radius.circular(10)),
+                    )),
+                future: AutorService().getAll(),
+                onSelect: (value) {
+                  autorId = value;
+                  id_autor = autorId;
+                },
+                initialValue: autorId,
+                child: 'nome',
+                value: 'id',
+              ),
               SizedBox(
                 height: 15,
               ),
               DropdownEditora(
-                  decoration: InputDecoration(
-                      labelText: "Editora",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(new Radius.circular(10)),
-                      )),
-                  future: EditoraService().getAll(),
-                  onSelect: (value) {
-                    editoraId = value;
-                    id_editora = editoraId;
-                  },
-                  initialValue: editoraId,
-                  child: 'nome',
-                  value: 'id',
-                ),
-
+                decoration: InputDecoration(
+                    labelText: "Editora",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(new Radius.circular(10)),
+                    )),
+                future: EditoraService().getAll(),
+                onSelect: (value) {
+                  editoraId = value;
+                  id_editora = editoraId;
+                },
+                initialValue: editoraId,
+                child: 'nome',
+                value: 'id',
+              ),
               SizedBox(
                 height: 15,
               ),
@@ -207,8 +204,13 @@ class _LivroEditarViewState extends State<LivroEditarView> {
 
                       Provider.of<LivroService>(context, listen: false)
                           .editarLivro(
-                              livro, id_categoria, id_autor, id_editora);
-                      Get.back();
+                              livro, id_categoria, id_autor, id_editora)
+                          .then((value) => {
+                                Get.snackbar(
+                                    "Edição de livro", value.toString(),
+                                    backgroundColor: Colors.green.shade50)
+                              });
+                      Navigator.of(context).pop();
                     }
                   },
                   child: Text(

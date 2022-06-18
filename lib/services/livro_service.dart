@@ -44,8 +44,7 @@ class LivroService extends ChangeNotifier {
     }
   }
 
-  Future<http.Response> cadastrarLivro(Livro livro, String id_categoria,String id_autor, String id_editora) async{
-    print("https://biblioteca-lucas.herokuapp.com/api/livro/${id_categoria}/${id_autor}/${id_editora}");
+  Future<String> cadastrarLivro(Livro livro, String id_categoria,String id_autor, String id_editora) async{
     final http.Response response = await http.post(
       Uri.parse("https://biblioteca-lucas.herokuapp.com/api/livro/${id_categoria}/${id_autor}/${id_editora}"),
       headers: <String, String>{
@@ -78,13 +77,14 @@ class LivroService extends ChangeNotifier {
 
       _livros.add(lv);
       notifyListeners();
-    }
 
-    return response;
+      return "Cadatrado com sucesso";
+    }else{
+      return "Não foi possível realizar o cadastro";
+    }
   }
 
-  Future<http.Response> editarLivro(Livro livro, String id_categoria,String id_autor,String id_editora) async{
-  print("https://biblioteca-lucas.herokuapp.com/api/livro/${id_categoria}/${id_autor}/${id_editora}");
+  Future<String> editarLivro(Livro livro, String id_categoria,String id_autor,String id_editora) async{
     final http.Response response = await http.put(
       Uri.parse("https://biblioteca-lucas.herokuapp.com/api/livro/${id_categoria}/${id_autor}/${id_editora}"),
       headers: <String, String>{
@@ -99,27 +99,30 @@ class LivroService extends ChangeNotifier {
       }),
     );
 
-  _livros.forEach((element) {
-    if (element.id == livro.id) {
-      if (response.statusCode == 200) {
-        final json = jsonDecode(response.body);
-        final livro = json;
-        element.titulo = livro["titulo"];
-        element.ano = livro["ano"];
-        element.isbn = livro["isbn"];
-        element.imagem = livro["imagem"];
-        element.categoria.id = livro["categoria"]["id"].toString();
-        element.categoria.descricao = livro["categoria"]["descricao"];
-        element.editora.id = livro["editora"]["id"].toString();
-        element.editora.nome = livro["editora"]["nome"];
-        element.autor.id = livro["autor"]["id"].toString();
-        element.autor.nome = livro["autor"]["nome"];
-        notifyListeners();
-      }
+    if (response.statusCode == 200) {
+      _livros.forEach((element) {
+        if (element.id == livro.id) {
+          if (response.statusCode == 200) {
+            final json = jsonDecode(response.body);
+            final livro = json;
+            element.titulo = livro["titulo"];
+            element.ano = livro["ano"];
+            element.isbn = livro["isbn"];
+            element.imagem = livro["imagem"];
+            element.categoria.id = livro["categoria"]["id"].toString();
+            element.categoria.descricao = livro["categoria"]["descricao"];
+            element.editora.id = livro["editora"]["id"].toString();
+            element.editora.nome = livro["editora"]["nome"];
+            element.autor.id = livro["autor"]["id"].toString();
+            element.autor.nome = livro["autor"]["nome"];
+            notifyListeners();
+          }
+        }
+      });
+      return "Editado com sucesso";
+    }else{
+      return "Não foi possível editar";
     }
-  });
-
-    return response;
   }
 
   Future<http.Response> deletarLivro(String id_livro) async {

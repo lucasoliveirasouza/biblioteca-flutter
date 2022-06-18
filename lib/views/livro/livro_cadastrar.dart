@@ -202,8 +202,12 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                           isbn.text, imagem.text);
                       Provider.of<LivroService>(context, listen: false)
                           .cadastrarLivro(
-                              livro, id_categoria, id_autor, id_editora);
-                      Get.back();
+                              livro, id_categoria, id_autor, id_editora).then((value) => {
+                        Get.snackbar(
+                            "Cadastro de livro", value.toString(),
+                            backgroundColor: Colors.green.shade50)
+                      });
+                      Navigator.of(context).pop();
                     }
                   },
                   child: Text(

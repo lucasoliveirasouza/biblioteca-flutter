@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 class EditoraEditarView extends StatefulWidget {
   Editora editora;
+
   EditoraEditarView({Key? key, required this.editora}) : super(key: key);
 
   @override
@@ -15,6 +16,7 @@ class EditoraEditarView extends StatefulWidget {
 class _EditoraEditarViewState extends State<EditoraEditarView> {
   final nome = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     nome.text = widget.editora.nome;
@@ -57,11 +59,12 @@ class _EditoraEditarViewState extends State<EditoraEditarView> {
                     if (formKey.currentState!.validate()) {
                       Provider.of<EditoraService>(context, listen: false)
                           .editarEditora(
-                          widget.editora.id.toString(), nome.text).then((value) => {
-                        Get.snackbar(
-                            "Edição de editora", value.toString(),
-                            backgroundColor: Colors.green.shade50)
-                      });
+                              widget.editora.id.toString(), nome.text)
+                          .then((value) => {
+                                Get.snackbar(
+                                    "Edição de editora", value.toString(),
+                                    backgroundColor: Colors.green.shade50)
+                              });
                       Navigator.of(context).pop();
                     }
                   },
