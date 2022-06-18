@@ -1,6 +1,7 @@
 import 'package:biblioteca/componentes/dropdown_autor.dart';
 import 'package:biblioteca/componentes/dropdown_categoria.dart';
 import 'package:biblioteca/componentes/dropdown_editora.dart';
+import 'package:biblioteca/componentes/form_field_padrao.dart';
 import 'package:biblioteca/models/livro.dart';
 import 'package:biblioteca/services/autor_service.dart';
 import 'package:biblioteca/services/categoria_service.dart';
@@ -30,18 +31,8 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
   String id_editora = "";
   String id_autor = "";
 
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-  }
-
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Cadastrar Livro"),
@@ -52,143 +43,72 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
           padding: EdgeInsets.only(right: 20, top: 20, left: 20),
           child: ListView(
             children: [
-              TextFormField(
-                controller: titulo,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  label: Text("Título"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      new Radius.circular(10.0),
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Informe o título do livro";
-                  }
-                  return null;
-                },
+              FormFieldPadrao(
+                controle: titulo,
+                title: "Título",
               ),
               SizedBox(
                 height: 15,
               ),
-
-              ListTile(
-                contentPadding: EdgeInsets.only(bottom: 10),
-                subtitle: DropdownAutor(
-                  decoration: InputDecoration(
-                      labelText: "Autor",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(new Radius.circular(10)),
-                      )),
-                  future: AutorService().getAll(),
-                  onSelect: (value) {
-                    autorId = value;
-                    id_autor = autorId;
-                  },
-                  initialValue: autorId,
-                  child: 'nome',
-                  value: 'id',
-                ),
-              ),
-
-              ListTile(
-                contentPadding: EdgeInsets.only(bottom: 10),
-                subtitle: DropdownEditora(
-                  decoration: InputDecoration(
-                      labelText: "Editora",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(new Radius.circular(10)),
-                      )),
-                  future: EditoraService().getAll(),
-                  onSelect: (value) {
-                    editoraId = value;
-                    id_editora = editoraId;
-                  },
-                  initialValue: editoraId,
-                  child: 'nome',
-                  value: 'id',
-                ),
-              ),
-
-              TextFormField(
-                controller: ano,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  label: Text("Ano"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      new Radius.circular(10.0),
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Informe o ano do livro";
-                  }
-                  return null;
+              DropdownAutor(
+                nome: "Autor",
+                future: AutorService().getAll(),
+                onSelect: (value) {
+                  autorId = value;
+                  id_autor = autorId;
                 },
+                initialValue: autorId,
+                child: 'nome',
+                value: 'id',
               ),
               SizedBox(
                 height: 15,
               ),
-              TextFormField(
-                controller: isbn,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  label: Text("ISBN"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      new Radius.circular(10.0),
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Informe o ISBN do livro";
-                  }
-                  return null;
+              DropdownEditora(
+                nome: "Editora",
+                future: EditoraService().getAll(),
+                onSelect: (value) {
+                  editoraId = value;
+                  id_editora = editoraId;
                 },
+                initialValue: editoraId,
+                child: 'nome',
+                value: 'id',
               ),
               SizedBox(
                 height: 15,
               ),
-              ListTile(
-                contentPadding: EdgeInsets.only(bottom: 10),
-                subtitle: DropdownCategoria(
-                  decoration: InputDecoration(
-                      labelText: "Categoria",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(new Radius.circular(10)),
-                      )),
-                  future: CategoriaService().getAll(),
-                  onSelect: (value) {
-                    categoriaId = value;
-                    id_categoria = categoriaId;
-                  },
-                  initialValue: categoriaId,
-                  child: 'descricao',
-                  value: 'id',
-                ),
+              FormFieldPadrao(
+                controle: ano,
+                title: "Ano",
               ),
-              TextFormField(
-                controller: imagem,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  label: Text("Link da capa"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      new Radius.circular(10.0),
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Informe o link da imagem do livro";
-                  }
-                  return null;
+              SizedBox(
+                height: 15,
+              ),
+              FormFieldPadrao(
+                controle: isbn,
+                title: "ISBN",
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              DropdownCategoria(
+                nome: "Categoria",
+                future: CategoriaService().getAll(),
+                onSelect: (value) {
+                  categoriaId = value;
+                  id_categoria = categoriaId;
                 },
+                initialValue: categoriaId,
+                child: 'descricao',
+                value: 'id',
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              FormFieldPadrao(
+                controle: imagem,
+                title: "Link da capa",
               ),
               SizedBox(
                 height: 25,
@@ -202,11 +122,12 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                           isbn.text, imagem.text);
                       Provider.of<LivroService>(context, listen: false)
                           .cadastrarLivro(
-                              livro, id_categoria, id_autor, id_editora).then((value) => {
-                        Get.snackbar(
-                            "Cadastro de livro", value.toString(),
-                            backgroundColor: Colors.green.shade50)
-                      });
+                              livro, id_categoria, id_autor, id_editora)
+                          .then((value) => {
+                                Get.snackbar(
+                                    "Cadastro de livro", value.toString(),
+                                    backgroundColor: Colors.green.shade50)
+                              });
                       Navigator.of(context).pop();
                     }
                   },

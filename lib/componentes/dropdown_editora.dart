@@ -7,11 +7,11 @@ class DropdownEditora extends StatefulWidget {
   Future<List<Editora?>?> future;
   String initialValue;
   String child;
+  String nome;
   List<String>? childList = [];
   String value;
   ValueChanged? onTap;
   Function(String)? onSelect;
-  InputDecoration? decoration;
 
   DropdownEditora(
       {Key? key,
@@ -19,8 +19,8 @@ class DropdownEditora extends StatefulWidget {
         required this.initialValue,
         required this.child,
         required this.value,
+        required this.nome,
         this.onSelect,
-        this.decoration,
         this.onTap,
         this.childList})
       : super(key: key);
@@ -51,7 +51,11 @@ class _DropdownEditoraState
             }
           }
           return DropdownButtonFormField<String>(
-            decoration: widget.decoration,
+            decoration: InputDecoration(
+                labelText: widget.nome,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(new Radius.circular(10)),
+                )),
             icon: Icon(null),
             value: widget.initialValue,
             items: snapshot.data?.map((e) {

@@ -1,6 +1,7 @@
 import 'package:biblioteca/componentes/dropdown_autor.dart';
 import 'package:biblioteca/componentes/dropdown_categoria.dart';
 import 'package:biblioteca/componentes/dropdown_editora.dart';
+import 'package:biblioteca/componentes/form_field_padrao.dart';
 import 'package:biblioteca/models/livro.dart';
 import 'package:biblioteca/services/autor_service.dart';
 import 'package:biblioteca/services/categoria_service.dart';
@@ -56,33 +57,15 @@ class _LivroEditarViewState extends State<LivroEditarView> {
           padding: EdgeInsets.only(right: 20, top: 20, left: 20),
           child: ListView(
             children: [
-              TextFormField(
-                controller: titulo,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  label: Text("Título"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      new Radius.circular(10.0),
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Informe o título do livro";
-                  }
-                  return null;
-                },
+              FormFieldPadrao(
+                controle: titulo,
+                title: "Título",
               ),
               SizedBox(
                 height: 15,
               ),
               DropdownAutor(
-                decoration: InputDecoration(
-                    labelText: "Autor",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(new Radius.circular(10)),
-                    )),
+                nome: "Autor",
                 future: AutorService().getAll(),
                 onSelect: (value) {
                   autorId = value;
@@ -96,11 +79,7 @@ class _LivroEditarViewState extends State<LivroEditarView> {
                 height: 15,
               ),
               DropdownEditora(
-                decoration: InputDecoration(
-                    labelText: "Editora",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(new Radius.circular(10)),
-                    )),
+                nome: "Editora",
                 future: EditoraService().getAll(),
                 onSelect: (value) {
                   editoraId = value;
@@ -113,54 +92,22 @@ class _LivroEditarViewState extends State<LivroEditarView> {
               SizedBox(
                 height: 15,
               ),
-              TextFormField(
-                controller: ano,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  label: Text("Ano"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      new Radius.circular(10.0),
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Informe o ano do livro";
-                  }
-                  return null;
-                },
+              FormFieldPadrao(
+                controle: ano,
+                title: "Ano",
               ),
               SizedBox(
                 height: 15,
               ),
-              TextFormField(
-                controller: isbn,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  label: Text("ISBN"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      new Radius.circular(10.0),
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Informe o ISBN do livro";
-                  }
-                  return null;
-                },
+              FormFieldPadrao(
+                controle: isbn,
+                title: "ISBN",
               ),
               SizedBox(
                 height: 15,
               ),
               DropdownCategoria(
-                decoration: InputDecoration(
-                    labelText: "Categoria",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(new Radius.circular(10)),
-                    )),
+                nome: "Categoria",
                 future: CategoriaService().getAll(),
                 onSelect: (value) {
                   categoriaId = value;
@@ -173,23 +120,9 @@ class _LivroEditarViewState extends State<LivroEditarView> {
               SizedBox(
                 height: 15,
               ),
-              TextFormField(
-                controller: imagem,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  label: Text("Link da capa"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      new Radius.circular(10.0),
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Informe o link da imagem do livro";
-                  }
-                  return null;
-                },
+              FormFieldPadrao(
+                controle: imagem,
+                title: "Link da capa",
               ),
               SizedBox(
                 height: 25,

@@ -8,11 +8,11 @@ class DropdownAutor extends StatefulWidget {
   Future<List<Autor?>?> future;
   String initialValue;
   String child;
+  String nome;
   List<String>? childList = [];
   String value;
   ValueChanged? onTap;
   Function(String)? onSelect;
-  InputDecoration? decoration;
 
   DropdownAutor(
       {Key? key,
@@ -20,8 +20,8 @@ class DropdownAutor extends StatefulWidget {
         required this.initialValue,
         required this.child,
         required this.value,
+        required this.nome,
         this.onSelect,
-        this.decoration,
         this.onTap,
         this.childList})
       : super(key: key);
@@ -52,7 +52,11 @@ class _DropdownAutorState
             }
           }
           return DropdownButtonFormField<String>(
-            decoration: widget.decoration,
+            decoration: InputDecoration(
+                labelText: widget.nome,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(new Radius.circular(10)),
+                )),
             icon: Icon(null),
             value: widget.initialValue,
             items: snapshot.data?.map((e) {
