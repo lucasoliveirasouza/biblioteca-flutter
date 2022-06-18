@@ -1,5 +1,6 @@
 import 'package:biblioteca/models/autor.dart';
 import 'package:biblioteca/services/autor_service.dart';
+import 'package:biblioteca/views/autor/autor_cadastrar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,14 @@ class _AutorListaViewState extends State<AutorListaView> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Autores"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              Get.to(() => AutorCadastrarView());
+            },
+          )
+        ],
       ),
       body: Consumer<AutorService>(
         builder: (context, repositorio, child) {
