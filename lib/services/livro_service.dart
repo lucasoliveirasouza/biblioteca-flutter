@@ -59,9 +59,26 @@ class LivroService extends ChangeNotifier {
       }),
     );
 
-    _livros.clear();
-    _buscarLivros();
-    notifyListeners();
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      final livro = json;
+
+      print(livro["titulo"]);
+
+      Livro lv = Livro(livro["id"], livro["titulo"], livro["ano"], livro["isbn"], livro["imagem"]);
+
+      Categoria c = Categoria(livro["categoria"]["id"].toString(), livro["categoria"]["descricao"]);
+      lv.setCategoria(c);
+
+      Editora e = Editora(livro["editora"]["id"].toString(), livro["editora"]["nome"]);
+      lv.setEditora(e);
+
+      Autor a = Autor(livro["autor"]["id"].toString(), livro["autor"]["nome"]);
+      lv.setAutor(a);
+
+      _livros.add(lv);
+      notifyListeners();
+    }
 
     return response;
   }
@@ -82,9 +99,25 @@ class LivroService extends ChangeNotifier {
       }),
     );
 
-    _livros.clear();
-    _buscarLivros();
-    notifyListeners();
+  _livros.forEach((element) {
+    if (element.id == livro.id) {
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body);
+        final livro = json;
+        element.titulo = livro["titulo"];
+        element.ano = livro["ano"];
+        element.isbn = livro["isbn"];
+        element.imagem = livro["imagem"];
+        element.categoria.id = livro["categoria"]["id"].toString();
+        element.categoria.descricao = livro["categoria"]["descricao"];
+        element.editora.id = livro["editora"]["id"].toString();
+        element.editora.nome = livro["editora"]["nome"];
+        element.autor.id = livro["autor"]["id"].toString();
+        element.autor.nome = livro["autor"]["nome"];
+        notifyListeners();
+      }
+    }
+  });
 
     return response;
   }
@@ -98,8 +131,7 @@ class LivroService extends ChangeNotifier {
       },
     );
 
-    _livros.clear();
-    _buscarLivros();
+    _livros.removeWhere((element) => element.id == id_livro);
     notifyListeners();
     return response;
   }
