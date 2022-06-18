@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class AutorListaView extends StatefulWidget {
-   AutorListaView({Key? key}) : super(key: key);
+  AutorListaView({Key? key}) : super(key: key);
 
   @override
   _AutorListaViewState createState() => _AutorListaViewState();
@@ -34,12 +34,32 @@ class _AutorListaViewState extends State<AutorListaView> {
             itemCount: repositorio.autores.length,
             itemBuilder: (BuildContext contexto, int autor) {
               final List<Autor> lista = repositorio.autores;
-              return Card(
-                child: ListTile(
-                  title: Center(child: Text(lista[autor].nome)),
-                  onTap: (){
-                    Get.to(()=> AutorLivrosView(autor: lista[autor]));
-                  },
+              final item = lista[autor].nome;
+              return Dismissible(
+                key: Key(item),
+                child: Card(
+                  child: ListTile(
+                    title: Center(child: Text(lista[autor].nome)),
+                    onTap: () {
+                      Get.to(() => AutorLivrosView(autor: lista[autor]));
+                    },
+                  ),
+                ),
+                onDismissed: (direction) {
+                  Provider.of<AutorService>(context, listen: false)
+                      .deletarAutor(lista[autor].id.toString());
+                  Get.snackbar(
+                    "Excluir autor",
+                    "Autor ${lista[autor].nome} excluído",
+                    backgroundColor: Colors.green.shade100,
+                  );
+                },
+                background: Container(
+                  color: Colors.red,
+                  child: Align(
+                    alignment: Alignment(-0.9, 0),
+                    child: Icon(Icons.delete, color: Colors.white),
+                  ),
                 ),
               );
             },

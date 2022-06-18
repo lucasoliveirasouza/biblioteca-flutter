@@ -133,7 +133,7 @@ class _AutorLivrosViewState extends State<AutorLivrosView> {
             .deletarAutor(widget.autor.id.toString());
         Get.close(0);
         Get.back();
-        Get.snackbar("Excluir editora", "Autor excluída com sucesso");
+        Get.snackbar("Excluir autor", "Autor excluída com sucesso",backgroundColor: Colors.green.shade100);
       },
       textConfirm: "Confirmar",
       textCancel: "Cancelar",
