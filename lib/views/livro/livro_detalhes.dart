@@ -146,7 +146,7 @@ class _LivroDetalhesViewState extends State<LivroDetalhesView> {
         titleStyle: TextStyle(color: Colors.green),
         middleTextStyle: TextStyle(color: Colors.white),
         onConfirm: () {
-          Provider.of<LivroService>(context, listen: false).deletarLivro("47");
+          Provider.of<LivroService>(context, listen: false).deletarLivro(widget.livro.id.toString());
           Get.close(0);
           Get.back();
         },

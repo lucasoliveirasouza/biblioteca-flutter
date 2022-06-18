@@ -45,9 +45,9 @@ class LivroService extends ChangeNotifier {
   }
 
   Future<http.Response> cadastrarLivro(Livro livro, String id_categoria,String id_autor, String id_editora) async{
-    print("https://biblioteca-lucas.herokuapp.com//api/livro/${id_categoria}/${id_autor}/${id_editora}");
+    print("https://biblioteca-lucas.herokuapp.com/api/livro/${id_categoria}/${id_autor}/${id_editora}");
     final http.Response response = await http.post(
-      Uri.parse("https://biblioteca-lucas.herokuapp.com//api/livro/${id_categoria}/${id_autor}/${id_editora}"),
+      Uri.parse("https://biblioteca-lucas.herokuapp.com/api/livro/${id_categoria}/${id_autor}/${id_editora}"),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -123,7 +123,7 @@ class LivroService extends ChangeNotifier {
   }
 
   Future<http.Response> deletarLivro(String id_livro) async {
-    print("https://biblioteca-lucas.herokuapp.com/api/livro/${id_livro}");
+    print("https://biblioteca-lucas.herokuapp.com/api/livro/${id_livro}/");
     final http.Response response = await http.delete(
       Uri.parse("https://biblioteca-lucas.herokuapp.com/api/livro/${id_livro}/"),
       headers: <String, String>{
@@ -131,7 +131,7 @@ class LivroService extends ChangeNotifier {
       },
     );
 
-    _livros.removeWhere((element) => element.id == id_livro);
+    _livros.removeWhere((element) => element.id.toString() == id_livro);
     notifyListeners();
     return response;
   }
