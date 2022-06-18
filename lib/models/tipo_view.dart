@@ -1,0 +1,4 @@
+enum TipoView {
+  EDITAR,
+  CADASTRAR
+}
