@@ -1,4 +1,5 @@
 
+import 'package:biblioteca/componentes/card_item.dart';
 import 'package:biblioteca/views/autor/autor_lista.dart';
 import 'package:biblioteca/views/categoria/categoria_lista.dart';
 import 'package:biblioteca/views/editora/editora_lista.dart';
@@ -20,47 +21,38 @@ class _GeralViewState extends State<GeralView> {
       appBar: AppBar(
         title: Text("Itens Gerais"),
       ),
-      body: Container(
-        padding: EdgeInsets.all(15),
-        child: ListView(
-          children: [
-            Card(
-              child: ListTile(
-                title: Text(
-                  "Autores",
-                ),
-                subtitle: Text("Todos autores disponíveis"),
-                onTap: (){
-                  Get.to(()=> AutorListaView());
-                },
-              ),
-            ),
-            Card(
-              child: ListTile(
-                title: Text(
-                    "Categorias",
-                ),
-                subtitle: Text("Todas categorias disponíveis"),
-                onTap: (){
-                  Get.to(()=> CategoriaListaView());
-                },
-
-              ),
-            ),
-            Card(
-              child: ListTile(
-                title: Text(
-                  "Editoras",
-                ),
-                subtitle: Text("Todas editoras disponíveis"),
-                onTap: (){
-                  Get.to(()=> EditoraListaView());
-                },
-              ),
-            ),
-          ],
+      body:Container(
+    child: GridView.count(
+    primary: false,
+      padding: const EdgeInsets.all(20),
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+      crossAxisCount: 2,
+      children: <Widget>[
+        CardItem(
+          image: "autor.png",
+          title: "Autores",
+          onTap: () {
+            Get.to(()=> AutorListaView());
+          },
         ),
-      ),
+        CardItem(
+          image: "categoria.png",
+          title: "Categorias",
+          onTap: () {
+            Get.to(()=> CategoriaListaView());
+          },
+        ),
+        CardItem(
+          image: "editora.png",
+          title: "Editoras",
+          onTap: () {
+            Get.to(()=> EditoraListaView());
+          },
+        ),
+
+      ],
+    )),
     );
   }
 }

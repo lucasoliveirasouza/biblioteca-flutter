@@ -13,6 +13,12 @@ class _SobreViewState extends State<SobreView> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Sobre"),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.exit_to_app),
+          )
+        ],
       ),
       body: Container(
         padding: EdgeInsets.all(20),

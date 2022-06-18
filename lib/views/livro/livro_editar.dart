@@ -38,16 +38,12 @@ class _LivroEditarViewState extends State<LivroEditarView> {
   @override
   Widget build(BuildContext context) {
     titulo.text = widget.livro.titulo;
-
     isbn.text = widget.livro.isbn;
     imagem.text = widget.livro.imagem;
     ano.text = widget.livro.ano.toString();
     categoriaId = widget.livro.categoria.id;
     editoraId = widget.livro.editora.id;
     autorId = widget.livro.autor.id;
-    id_categoria = widget.livro.categoria.id;
-    id_editora = widget.livro.editora.id;
-    id_autor = widget.livro.autor.id;
 
     return Scaffold(
       appBar: AppBar(
