@@ -35,12 +35,32 @@ class _EditoraListaViewState extends State<EditoraListaView> {
             itemCount: repositorio.editoras.length,
             itemBuilder: (BuildContext contexto, int editora) {
               final List<Editora> lista = repositorio.editoras;
-              return Card(
-                child: ListTile(
-                  title: Center(child: Text(lista[editora].nome)),
-                  onTap: (){
-                    Get.to(()=> EditoraLivrosView(editora: lista[editora]));
-                  },
+              final item = lista[editora].nome;
+              return Dismissible(
+                key: Key(item),
+                child: Card(
+                  child: ListTile(
+                    title: Center(child: Text(lista[editora].nome)),
+                    onTap: (){
+                      Get.to(()=> EditoraLivrosView(editora: lista[editora]));
+                    },
+                  ),
+                ),
+                onDismissed: (direction) {
+                  Provider.of<EditoraService>(context, listen: false)
+                      .deletarEditora(lista[editora].id.toString());
+                  Get.snackbar(
+                    "Excluir autor",
+                    "Editora ${lista[editora].nome} excluída",
+                    backgroundColor: Colors.green.shade100,
+                  );
+                },
+                background: Container(
+                  color: Colors.red,
+                  child: Align(
+                    alignment: Alignment(-0.9, 0),
+                    child: Icon(Icons.delete, color: Colors.white),
+                  ),
                 ),
               );
             },

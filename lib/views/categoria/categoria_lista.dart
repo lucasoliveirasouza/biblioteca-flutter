@@ -35,12 +35,33 @@ class _CategoriaListaViewState extends State<CategoriaListaView> {
             itemCount: repositorio.categorias.length,
             itemBuilder: (BuildContext contexto, int categoria) {
               final List<Categoria> lista = repositorio.categorias;
-              return Card(
-                child: ListTile(
-                  title: Center(child: Text(lista[categoria].descricao)),
-                  onTap: (){
-                    Get.to(()=> CategoriaLivrosView(categoria: lista[categoria]));
-                  },
+              final item = lista[categoria].descricao;
+              return Dismissible(
+                key: Key(item),
+                child: Card(
+                  child: ListTile(
+                    title: Center(child: Text(lista[categoria].descricao)),
+                    onTap: () {
+                      Get.to(() =>
+                          CategoriaLivrosView(categoria: lista[categoria]));
+                    },
+                  ),
+                ),
+                onDismissed: (direction) {
+                  Provider.of<CategoriaService>(context, listen: false)
+                      .deletarCategoria(lista[categoria].id.toString());
+                  Get.snackbar(
+                    "Excluir autor",
+                    "Categoria ${lista[categoria].descricao} excluída",
+                    backgroundColor: Colors.green.shade100,
+                  );
+                },
+                background: Container(
+                  color: Colors.red,
+                  child: Align(
+                    alignment: Alignment(-0.9, 0),
+                    child: Icon(Icons.delete, color: Colors.white),
+                  ),
                 ),
               );
             },

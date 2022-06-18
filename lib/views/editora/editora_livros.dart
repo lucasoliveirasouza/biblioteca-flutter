@@ -133,7 +133,7 @@ class _EditoraLivrosViewState extends State<EditoraLivrosView> {
             .deletarEditora(widget.editora.id.toString());
         Get.close(0);
         Get.back();
-        Get.snackbar("Excluir editora", "Editora excluída com sucesso");
+        Get.snackbar("Excluir editora", "Editora excluída com sucesso",backgroundColor: Colors.green.shade100,);
       },
       textConfirm: "Confirmar",
       textCancel: "Cancelar",
