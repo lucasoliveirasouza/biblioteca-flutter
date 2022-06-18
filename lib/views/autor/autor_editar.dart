@@ -22,7 +22,7 @@ class _AutorEditarViewState extends State<AutorEditarView> {
     nome.text = widget.autor.nome;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.autor.nome),
+        title: Text("Editar autor"),
       ),
       body: Form(
         key: formKey,

@@ -1,5 +1,6 @@
 import 'package:biblioteca/models/autor.dart';
 import 'package:biblioteca/services/autor_service.dart';
+import 'package:biblioteca/services/livro_service.dart';
 import 'package:biblioteca/views/autor/autor_editar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,11 +15,18 @@ class AutorLivrosView extends StatefulWidget {
 }
 
 class _AutorLivrosViewState extends State<AutorLivrosView> {
+
   @override
   Widget build(BuildContext context) {
+    Autor autor = widget.autor;
+    Provider.of<AutorService>(context).autores.forEach((element) {
+      if(element.id == widget.autor.id){
+        autor = element;
+      }
+    });
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.autor.nome),
+        title: Text(autor.nome),
         actions: [
           PopupMenuButton(
               elevation: 20,
