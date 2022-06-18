@@ -132,6 +132,7 @@ class _CategoriaLivrosViewState extends State<CategoriaLivrosView> {
             .deletarCategoria(widget.categoria.id.toString());
         Get.close(0);
         Get.back();
+        Get.snackbar("Excluir editora", "Categoria excluída com sucesso");
       },
       textConfirm: "Confirmar",
       textCancel: "Cancelar",

@@ -155,6 +155,7 @@ class _LivroDetalhesViewState extends State<LivroDetalhesView> {
           Provider.of<LivroService>(context, listen: false).deletarLivro(widget.livro.id.toString());
           Get.close(0);
           Get.back();
+          Get.snackbar("Excluir editora", "Livro excluída com sucesso");
         },
         textConfirm: "Confirmar",
         textCancel: "Cancelar",
