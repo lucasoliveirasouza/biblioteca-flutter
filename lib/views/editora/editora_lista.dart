@@ -1,7 +1,9 @@
 import 'package:biblioteca/models/editora.dart';
 import 'package:biblioteca/services/editora_service.dart';
+import 'package:biblioteca/views/editora/editora_cadastrar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class EditoraListaView extends StatefulWidget {
@@ -17,6 +19,14 @@ class _EditoraListaViewState extends State<EditoraListaView> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Editoras"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              Get.to(() => EditoraCadastrarView());
+            },
+          )
+        ],
       ),
       body: Consumer<EditoraService>(
         builder: (context, repositorio, child) {
