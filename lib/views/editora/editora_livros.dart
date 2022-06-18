@@ -14,18 +14,26 @@ class EditoraLivrosView extends StatefulWidget {
 }
 
 class _EditoraLivrosViewState extends State<EditoraLivrosView> {
+
+
   @override
   Widget build(BuildContext context) {
+    Editora editora = widget.editora;
+    Provider.of<EditoraService>(context).editoras.forEach((element) {
+      if(element.id == widget.editora.id){
+        editora = element;
+      }
+    });
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.editora.nome),
+        title: Text(editora.nome),
         actions: [
           PopupMenuButton(
               elevation: 20,
               enabled: true,
               onSelected: (value) {
                 if(value=="editar"){
-                  Get.to(()=> EditoraEditarView(editora: widget.editora));
+                  Get.to(()=> EditoraEditarView(editora: editora));
                 }else if(value == "deletar"){
                   deletar();
 
