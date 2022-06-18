@@ -3,6 +3,7 @@ import 'package:biblioteca/services/autor_service.dart';
 import 'package:biblioteca/services/categoria_service.dart';
 import 'package:biblioteca/services/editora_service.dart';
 import 'package:biblioteca/services/livro_service.dart';
+import 'package:biblioteca/views/auth/login.dart';
 import 'package:biblioteca/views/menu/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: MenuView(),
+      home: LoginView(),
     );
   }
 }
