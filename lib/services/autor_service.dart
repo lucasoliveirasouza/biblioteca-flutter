@@ -63,9 +63,14 @@ class AutorService extends ChangeNotifier {
       }),
     );
 
-    _autores.clear();
-    _buscarAutores();
-    notifyListeners();
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      final autor = json;
+      print(autor["nome"]);
+      Autor aut = Autor(autor["id"].toString(), autor["nome"]);
+      _autores.add(aut);
+      notifyListeners();
+    }
 
     return response;
   }
@@ -77,8 +82,8 @@ class AutorService extends ChangeNotifier {
         'Content-Type': 'application/json',
       },
     );
-    _autores.clear();
-    _buscarAutores();
+
+    _autores.removeWhere((element) => element.id == id);
     notifyListeners();
     return response;
   }
@@ -95,9 +100,12 @@ class AutorService extends ChangeNotifier {
       }),
     );
 
-    _autores.clear();
-    _buscarAutores();
-    notifyListeners();
+    _autores.forEach((element) {
+      if (element.id == id) {
+        element.nome = nome;
+        notifyListeners();
+      }
+    });
 
     return response;
   }

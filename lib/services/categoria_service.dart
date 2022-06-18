@@ -98,7 +98,6 @@ class CategoriaService extends ChangeNotifier {
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
       final catg = json;
-      print(catg["descricao"]);
       Categoria c = Categoria(catg["id"].toString(), catg["descricao"]);
       _categorias.add(c);
       notifyListeners();
