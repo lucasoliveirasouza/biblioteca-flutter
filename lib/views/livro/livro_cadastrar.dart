@@ -189,7 +189,7 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      Livro livro = Livro(0, titulo.text, autor.text, editora.text, int.parse(ano.text), isbn.text, imagem.text);
+                      Livro livro = Livro(0, titulo.text, int.parse(ano.text), isbn.text, imagem.text);
                       Provider.of<LivroService>(context, listen: false).cadastrarLivro(livro, valor);
                       Get.back();
                     }

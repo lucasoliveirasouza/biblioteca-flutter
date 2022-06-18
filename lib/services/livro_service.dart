@@ -25,8 +25,7 @@ class LivroService extends ChangeNotifier {
       List<dynamic> listaLivros = json;
 
       listaLivros.forEach((livro) {
-        Livro l = Livro(livro["id"], livro["titulo"], livro["autor"],
-            livro["editora"], livro["ano"], livro["isbn"], livro["imagem"]);
+        Livro l = Livro(livro["id"], livro["titulo"], livro["ano"], livro["isbn"], livro["imagem"]);
 
         Categoria c = Categoria(livro["categoria"]["id"].toString(), livro["categoria"]["descricao"]);
         l.setCategoria(c);
@@ -46,8 +45,6 @@ class LivroService extends ChangeNotifier {
       },
       body: jsonEncode(<String, String>{
         "ano": livro.ano.toString(),
-        "autor": livro.autor,
-        "editora": livro.editora,
         "imagem": livro.imagem,
         "isbn": livro.isbn,
         "titulo": livro.titulo,
@@ -75,8 +72,6 @@ class LivroService extends ChangeNotifier {
       body: jsonEncode(<String, String>{
         'id': livro.id.toString(),
         "ano": livro.ano.toString(),
-        "autor": livro.autor,
-        "editora": livro.editora,
         "imagem": livro.imagem,
         "isbn": livro.isbn,
         "titulo": livro.titulo,
@@ -99,8 +94,6 @@ class LivroService extends ChangeNotifier {
       body: jsonEncode(<String, String>{
         'id': livro.id.toString(),
         "ano": livro.ano.toString(),
-        "autor": livro.autor,
-        "editora": livro.editora,
         "imagem": livro.imagem,
         "isbn": livro.isbn,
         "titulo": livro.titulo,

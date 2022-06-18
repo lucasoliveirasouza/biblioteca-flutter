@@ -29,8 +29,7 @@ class _LivroEditarViewState extends State<LivroEditarView> {
   @override
   Widget build(BuildContext context) {
     titulo.text = widget.livro.titulo;
-    autor.text = widget.livro.autor;
-    editora.text = widget.livro.editora;
+
     isbn.text = widget.livro.isbn;
     imagem.text = widget.livro.imagem;
     ano.text = widget.livro.ano.toString();
@@ -196,7 +195,7 @@ class _LivroEditarViewState extends State<LivroEditarView> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      Livro livro = Livro(widget.livro.id, titulo.text, autor.text, editora.text, int.parse(ano.text), isbn.text, imagem.text);
+                      Livro livro = Livro(widget.livro.id, titulo.text, int.parse(ano.text), isbn.text, imagem.text);
 
                       Provider.of<LivroService>(context, listen: false).editarLivro(livro,widget.livro.categoria);
                       Get.back();

@@ -44,7 +44,7 @@ class _LivroListaViewState extends State<LivroListaView> {
                       fontWeight: FontWeight.bold
                     ),
                   ),
-                  subtitle: Text(lista[livro].autor),
+                  subtitle: Text(lista[livro].autor.nome),
                   leading: SizedBox(
                     height: 50,
                     width: 50,

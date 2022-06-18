@@ -101,7 +101,7 @@ class _CategoriaLivrosViewState extends State<CategoriaLivrosView> {
                             child: Image.network(snapshot.data![index].imagem),
                           ),
                             title: Text(snapshot.data![index].titulo),
-                            subtitle: Text(snapshot.data![index].autor),
+                            subtitle: Text(snapshot.data![index].autor.nome),
                             onTap: () {
                               Get.to(()=> LivroDetalhesView(livro: snapshot.data![index]));
 

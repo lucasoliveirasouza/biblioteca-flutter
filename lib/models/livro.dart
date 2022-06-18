@@ -1,3 +1,4 @@
+import 'package:biblioteca/models/autor.dart';
 import 'package:biblioteca/models/editora.dart';
 
 import 'categoria.dart';
@@ -5,17 +6,16 @@ import 'categoria.dart';
 class Livro {
   late int _id;
   late String _titulo;
-  late String _autor;
-  late String _editora;
+
   late int _ano;
   late String _isbn;
   late String _imagem;
 
+  late Editora _editora;
+  late Autor _autor;
   late Categoria _categoria;
 
-
-
-  Livro(this._id, this._titulo, this._autor, this._editora, this._ano,
+  Livro(this._id, this._titulo, this._ano,
       this._isbn, this._imagem);
 
 
@@ -23,6 +23,18 @@ class Livro {
 
   void setCategoria(Categoria value) {
     _categoria = value;
+  }
+
+  Autor get autor => _autor;
+
+  void setAutor(Autor value) {
+    _autor = value;
+  }
+
+  Editora get editora => _editora;
+
+  void setEditora(Editora value) {
+    _editora = value;
   }
 
   String get imagem => _imagem;
@@ -43,17 +55,6 @@ class Livro {
     _ano = value;
   }
 
-  String get editora => _editora;
-
-  set editora(String value) {
-    _editora = value;
-  }
-
-  String get autor => _autor;
-
-  set autor(String value) {
-    _autor = value;
-  }
 
   String get titulo => _titulo;
 

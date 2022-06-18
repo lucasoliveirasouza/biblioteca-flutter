@@ -101,7 +101,7 @@ class _LivroDetalhesViewState extends State<LivroDetalhesView> {
             ),
             RowTable(
               title: "Autor:",
-              valor: widget.livro.autor,
+              valor: widget.livro.autor.nome,
             ),
             SizedBox(
               height: 3,
@@ -122,7 +122,7 @@ class _LivroDetalhesViewState extends State<LivroDetalhesView> {
             ),
             RowTable(
               title: "Editora:",
-              valor: widget.livro.editora,
+              valor: widget.livro.editora.nome,
             ),
             SizedBox(
               height: 3,
@@ -146,7 +146,7 @@ class _LivroDetalhesViewState extends State<LivroDetalhesView> {
         titleStyle: TextStyle(color: Colors.green),
         middleTextStyle: TextStyle(color: Colors.white),
         onConfirm: () {
-          Livro livro = Livro(widget.livro.id, widget.livro.titulo, widget.livro.autor, widget.livro.editora, widget.livro.ano, widget.livro.isbn, widget.livro.imagem);
+          Livro livro = Livro(widget.livro.id, widget.livro.titulo, widget.livro.ano, widget.livro.isbn, widget.livro.imagem);
 
           Provider.of<LivroService>(context, listen: false).deletarLivro(livro,widget.livro.categoria);
           Get.close(0);
