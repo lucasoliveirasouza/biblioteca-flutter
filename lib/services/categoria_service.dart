@@ -1,7 +1,9 @@
 import 'dart:collection';
 import 'dart:convert';
 
+import 'package:biblioteca/models/autor.dart';
 import 'package:biblioteca/models/categoria.dart';
+import 'package:biblioteca/models/editora.dart';
 import 'package:biblioteca/models/livro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -65,10 +67,16 @@ class CategoriaService extends ChangeNotifier {
       List<dynamic> listaLivros = json;
 
       listaLivros.forEach((livro) {
-        Livro l = Livro(livro["id"], livro["titulo"], livro["autor"], livro["isbn"], livro["imagem"]);
+        Livro l = Livro(livro["id"], livro["titulo"],livro["ano"], livro["isbn"], livro["imagem"]);
 
         Categoria c = Categoria(livro["categoria"]["id"].toString(), livro["categoria"]["descricao"]);
         l.setCategoria(c);
+
+        Editora e = Editora(livro["editora"]["id"].toString(), livro["editora"]["nome"]);
+        l.setEditora(e);
+
+        Autor a = Autor(livro["autor"]["id"].toString(), livro["autor"]["nome"]);
+        l.setAutor(a);
 
         lv.add(l);
       });
