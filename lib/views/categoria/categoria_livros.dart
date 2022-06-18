@@ -122,27 +122,36 @@ class _CategoriaLivrosViewState extends State<CategoriaLivrosView> {
     );
   }
 
-  deletar(){
-    Get.defaultDialog(
-      title: "Deseja deletar essa categoria?",
-      titleStyle: TextStyle(color: Colors.green),
-      middleTextStyle: TextStyle(color: Colors.white),
-      onConfirm: () {
-        Provider.of<CategoriaService>(context, listen: false)
-            .deletarCategoria(widget.categoria.id.toString());
-        Get.close(0);
-        Get.back();
-        Get.snackbar("Excluir categoria", "Categoria excluída com sucesso",backgroundColor: Colors.green.shade100,);
+  deletar() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Deletar"),
+          content: const Text("Deseja realmente deletar essa categoria?"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Provider.of<CategoriaService>(context, listen: false)
+                    .deletarCategoria(widget.categoria.id.toString());
+                Navigator.of(context).pop();
+                Get.back();
+                Get.snackbar("Excluir categoria", "Categoria excluída com sucesso",backgroundColor: Colors.green.shade100,);
+              },
+              child: Text(
+                "Deletar",
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: Text("Cancelar"),
+            ),
+          ],
+        );
       },
-      textConfirm: "Confirmar",
-      textCancel: "Cancelar",
-      cancelTextColor: Colors.green,
-      confirmTextColor: Colors.white,
-      buttonColor: Colors.green,
-      radius: 1,
-      content: Column(
-        children: [],
-      ),
     );
   }
 }

@@ -59,16 +59,16 @@ class _AutorListaViewState extends State<AutorListaView> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text("Deletar"),
-                        content: const Text(
+                        title: Text("Deletar"),
+                        content: Text(
                             "Deseja realmente deletar esse autor?"),
                         actions: <Widget>[
                           TextButton(
                               onPressed: () => Navigator.of(context).pop(true),
-                              child: const Text("Deletar",style: TextStyle(color: Colors.red),)),
+                              child: Text("Deletar",style: TextStyle(color: Colors.red),)),
                           TextButton(
                             onPressed: () => Navigator.of(context).pop(false),
-                            child: const Text("Cancelar"),
+                            child: Text("Cancelar"),
                           ),
                         ],
                       );

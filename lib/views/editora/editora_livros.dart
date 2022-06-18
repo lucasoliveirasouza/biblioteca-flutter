@@ -123,27 +123,36 @@ class _EditoraLivrosViewState extends State<EditoraLivrosView> {
     );
   }
 
-  deletar(){
-    Get.defaultDialog(
-      title: "Deseja deletar essa categoria?",
-      titleStyle: TextStyle(color: Colors.green),
-      middleTextStyle: TextStyle(color: Colors.white),
-      onConfirm: () {
-        Provider.of<EditoraService>(context, listen: false)
-            .deletarEditora(widget.editora.id.toString());
-        Get.close(0);
-        Get.back();
-        Get.snackbar("Excluir editora", "Editora excluída com sucesso",backgroundColor: Colors.green.shade100,);
+  deletar() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Deletar"),
+          content: const Text("Deseja realmente deletar esse autor?"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Provider.of<EditoraService>(context, listen: false)
+                    .deletarEditora(widget.editora.id.toString());
+                Navigator.of(context).pop();
+                Get.back();
+                Get.snackbar("Excluir editora", "Editora excluída com sucesso",backgroundColor: Colors.green.shade100,);
+              },
+              child: Text(
+                "Deletar",
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: Text("Cancelar"),
+            ),
+          ],
+        );
       },
-      textConfirm: "Confirmar",
-      textCancel: "Cancelar",
-      cancelTextColor: Colors.green,
-      confirmTextColor: Colors.white,
-      buttonColor: Colors.green,
-      radius: 1,
-      content: Column(
-        children: [],
-      ),
     );
   }
 }
