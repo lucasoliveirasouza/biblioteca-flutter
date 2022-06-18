@@ -63,11 +63,9 @@ class _AutorEditarViewState extends State<AutorEditarView> {
                           widget.autor.id.toString(), nome.text)
                           .then((value) => {
                         Get.snackbar(
-                            "Edição de autor",
-                            value.toString(),
-                            backgroundColor: Colors.green.shade50
-                        )
-                      });
+                                    "Edição de autor", value.toString(),
+                                    backgroundColor: Colors.green.shade50)
+                              });
                       Navigator.of(context).pop();
                     }
                   },

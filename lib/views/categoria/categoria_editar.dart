@@ -59,7 +59,12 @@ class _CategoriaEditarViewState extends State<CategoriaEditarView> {
                     if (formKey.currentState!.validate()) {
                       Provider.of<CategoriaService>(context, listen: false)
                           .editarCategoria(
-                              widget.categoria.id.toString(), descricao.text);
+                              widget.categoria.id.toString(), descricao.text)
+                          .then((value) => {
+                                Get.snackbar(
+                                    "Edição de autor", value.toString(),
+                                    backgroundColor: Colors.green.shade50)
+                              });
                       Get.back();
                     }
                   },
@@ -75,5 +80,4 @@ class _CategoriaEditarViewState extends State<CategoriaEditarView> {
       ),
     );
   }
-
 }

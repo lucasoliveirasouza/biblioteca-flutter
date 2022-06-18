@@ -53,8 +53,14 @@ class _CategoriaCadatroViewState extends State<CategoriaCadatroView> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      Provider.of<CategoriaService>(context, listen: false).cadastrarCategoria(descricao.text);
-                      Get.back();
+                      Provider.of<CategoriaService>(context, listen: false)
+                          .cadastrarCategoria(descricao.text)
+                          .then((value) => {
+                                Get.snackbar(
+                                    "Cadastro de categoria", value.toString(),
+                                    backgroundColor: Colors.green.shade50)
+                              });
+                      Navigator.of(context).pop();
                     }
                   },
                   child: Text(

@@ -84,7 +84,7 @@ class CategoriaService extends ChangeNotifier {
     return lv;
   }
 
-  Future<http.Response> cadastrarCategoria(String descricao) async{
+  Future<String> cadastrarCategoria(String descricao) async{
     final http.Response response = await http.post(
       Uri.parse('https://biblioteca-lucas.herokuapp.com/api/categoria'),
       headers: <String, String>{
@@ -101,8 +101,39 @@ class CategoriaService extends ChangeNotifier {
       Categoria c = Categoria(catg["id"].toString(), catg["descricao"]);
       _categorias.add(c);
       notifyListeners();
+      return "Cadatrado com sucesso";
+    }else{
+      return "Não foi possível realizar o cadastro";
     }
-    return response;
+  }
+
+
+
+  Future<String> editarCategoria(String id, String descricao) async{
+    final http.Response response = await http.put(
+      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/categoria'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(<String, String>{
+        'id': id,
+        'descricao': descricao,
+      }),
+    );
+
+
+
+    if (response.statusCode == 200) {
+      _categorias.forEach((element) {
+        if (element.id == id) {
+          element.descricao = descricao;
+          notifyListeners();
+        }
+      });
+      return "Editado com sucesso";
+    }else{
+      return "Não foi possível editar";
+    }
   }
 
   Future<http.Response> deletarCategoria(String id) async {
@@ -117,28 +148,5 @@ class CategoriaService extends ChangeNotifier {
     notifyListeners();
     return response;
   }
-
-  Future<http.Response> editarCategoria(String id, String descricao) async{
-    final http.Response response = await http.put(
-      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/categoria'),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode(<String, String>{
-        'id': id,
-        'descricao': descricao,
-      }),
-    );
-
-    _categorias.forEach((element) {
-      if (element.id == id) {
-        element.descricao = descricao;
-        notifyListeners();
-      }
-    });
-
-    return response;
-  }
-
 
 }
