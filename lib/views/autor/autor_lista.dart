@@ -1,6 +1,6 @@
 import 'package:biblioteca/models/autor.dart';
 import 'package:biblioteca/services/autor_service.dart';
-import 'package:biblioteca/views/autor/autor_cadastrar_editar.dart';
+import 'package:biblioteca/views/autor/autor_cadastrar.dart';
 import 'package:biblioteca/views/autor/autor_livros.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,7 +23,7 @@ class _AutorListaViewState extends State<AutorListaView> {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              Get.to(() => AutorCadastrarEditarView());
+              Get.to(() => AutorCadastrarView());
             },
           )
         ],

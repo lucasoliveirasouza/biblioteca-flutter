@@ -1,3 +1,4 @@
+import 'package:biblioteca/componentes/form_field_padrao.dart';
 import 'package:biblioteca/services/editora_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,23 +27,9 @@ class _EditoraCadastrarViewState extends State<EditoraCadastrarView> {
           padding: EdgeInsets.only(right: 20, top: 20, left: 20),
           child: ListView(
             children: [
-              TextFormField(
-                controller: nome,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  label: Text("Nome"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      new Radius.circular(10.0),
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Informe o nome da editora";
-                  }
-                  return null;
-                },
+              FormFieldPadrao(
+                controle: nome,
+                title: "Nome",
               ),
               SizedBox(
                 height: 15,

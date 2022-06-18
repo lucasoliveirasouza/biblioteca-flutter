@@ -1,3 +1,4 @@
+import 'package:biblioteca/componentes/form_field_padrao.dart';
 import 'package:biblioteca/services/categoria_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,23 +27,9 @@ class _CategoriaCadatrarViewState extends State<CategoriaCadatrarView> {
           padding: EdgeInsets.only(right: 20, top: 20, left: 20),
           child: ListView(
             children: [
-              TextFormField(
-                controller: descricao,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  label: Text("Nome"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      new Radius.circular(10.0),
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Informe o nome da categoria";
-                  }
-                  return null;
-                },
+              FormFieldPadrao(
+                controle: descricao,
+                title: "Nome",
               ),
               SizedBox(
                 height: 15,

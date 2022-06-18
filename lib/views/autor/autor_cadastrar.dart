@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class AutorCadastrarEditarView extends StatefulWidget {
-  AutorCadastrarEditarView({Key? key}) : super(key: key);
+class AutorCadastrarView extends StatefulWidget {
+  AutorCadastrarView({Key? key}) : super(key: key);
 
   @override
-  _AutorCadastrarEditarViewState createState() => _AutorCadastrarEditarViewState();
+  _AutorCadastrarViewState createState() => _AutorCadastrarViewState();
 }
 
-class _AutorCadastrarEditarViewState extends State<AutorCadastrarEditarView> {
+class _AutorCadastrarViewState extends State<AutorCadastrarView> {
   final nome = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
