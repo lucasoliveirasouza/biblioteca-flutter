@@ -19,7 +19,7 @@ class _CadastrarUsuarioViewState extends State<CadastrarUsuarioView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(right: 20, left: 20, top: 210),
+        padding: EdgeInsets.only(right: 20, left: 20, top: 150),
         child: ListView(
           children: [
             Center(
@@ -33,14 +33,21 @@ class _CadastrarUsuarioViewState extends State<CadastrarUsuarioView> {
               ),
             ),
             SizedBox(
-              height: 40,
+              height: 30,
             ),
             FormFieldPadrao(
               controle: usuario,
               title: "Usuário",
             ),
             SizedBox(
-              height: 20,
+              height: 15,
+            ),
+            FormFieldPadrao(
+              controle: email,
+              title: "Email",
+            ),
+            SizedBox(
+              height: 15,
             ),
             FormFieldPadrao(
               controle: senha,
@@ -48,7 +55,15 @@ class _CadastrarUsuarioViewState extends State<CadastrarUsuarioView> {
               obscure: true,
             ),
             SizedBox(
-              height: 25,
+              height: 15,
+            ),
+            FormFieldPadrao(
+              controle: confirmarSenha,
+              title: "Confirmar senha",
+              obscure: true,
+            ),
+            SizedBox(
+              height: 20,
             ),
             Container(
               height: 55,
