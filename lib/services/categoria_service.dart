@@ -121,8 +121,6 @@ class CategoriaService extends ChangeNotifier {
       }),
     );
 
-
-
     if (response.statusCode == 200) {
       _categorias.forEach((element) {
         if (element.id == id) {

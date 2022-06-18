@@ -28,9 +28,6 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
   String categoriaId = "";
   String editoraId = "";
   String autorId = "";
-  String id_categoria = "";
-  String id_editora = "";
-  String id_autor = "";
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +53,6 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                 future: AutorService().getAll(),
                 onSelect: (value) {
                   autorId = value;
-                  id_autor = autorId;
                 },
                 initialValue: autorId,
                 child: 'nome',
@@ -70,7 +66,6 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                 future: EditoraService().getAll(),
                 onSelect: (value) {
                   editoraId = value;
-                  id_editora = editoraId;
                 },
                 initialValue: editoraId,
                 child: 'nome',
@@ -98,7 +93,6 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                 future: CategoriaService().getAll(),
                 onSelect: (value) {
                   categoriaId = value;
-                  id_categoria = categoriaId;
                 },
                 initialValue: categoriaId,
                 child: 'descricao',
@@ -123,7 +117,7 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                           isbn.text, imagem.text);
                       Provider.of<LivroService>(context, listen: false)
                           .cadastrarLivro(
-                              livro, id_categoria, id_autor, id_editora)
+                              livro, categoriaId, autorId, editoraId)
                           .then((value) => {
                                 Get.snackbar(
                                     "Cadastro de livro", value.toString(),
