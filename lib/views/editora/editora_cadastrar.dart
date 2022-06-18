@@ -13,6 +13,7 @@ class EditoraCadastrarView extends StatefulWidget {
 class _EditoraCadastrarViewState extends State<EditoraCadastrarView> {
   final nome = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,8 +53,14 @@ class _EditoraCadastrarViewState extends State<EditoraCadastrarView> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      Provider.of<EditoraService>(context, listen: false).cadastrarEditora(nome.text);
-                      Get.back();
+                      Provider.of<EditoraService>(context, listen: false)
+                          .cadastrarEditora(nome.text)
+                          .then((value) => {
+                                Get.snackbar(
+                                    "Cadastro de editora", value.toString(),
+                                    backgroundColor: Colors.green.shade50)
+                              });
+                      Navigator.of(context).pop();
                     }
                   },
                   child: Text(

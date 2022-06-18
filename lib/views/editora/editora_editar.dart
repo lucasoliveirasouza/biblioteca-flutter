@@ -57,8 +57,12 @@ class _EditoraEditarViewState extends State<EditoraEditarView> {
                     if (formKey.currentState!.validate()) {
                       Provider.of<EditoraService>(context, listen: false)
                           .editarEditora(
-                          widget.editora.id.toString(), nome.text);
-                      Get.back();
+                          widget.editora.id.toString(), nome.text).then((value) => {
+                        Get.snackbar(
+                            "Edição de editora", value.toString(),
+                            backgroundColor: Colors.green.shade50)
+                      });
+                      Navigator.of(context).pop();
                     }
                   },
                   child: Text(
