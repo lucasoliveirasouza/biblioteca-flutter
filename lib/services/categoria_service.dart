@@ -95,10 +95,14 @@ class CategoriaService extends ChangeNotifier {
       }),
     );
 
-    _categorias.clear();
-    _buscarCategorias();
-    notifyListeners();
-
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      final catg = json;
+      print(catg["descricao"]);
+      Categoria c = Categoria(catg["id"].toString(), catg["descricao"]);
+      _categorias.add(c);
+      notifyListeners();
+    }
     return response;
   }
 
@@ -109,8 +113,8 @@ class CategoriaService extends ChangeNotifier {
         'Content-Type': 'application/json',
       },
     );
-    _categorias.clear();
-    _buscarCategorias();
+
+    _categorias.removeWhere((element) => element.id == id);
     notifyListeners();
     return response;
   }
@@ -127,9 +131,12 @@ class CategoriaService extends ChangeNotifier {
       }),
     );
 
-    _categorias.clear();
-    _buscarCategorias();
-    notifyListeners();
+    _categorias.forEach((element) {
+      if (element.id == id) {
+        element.descricao = descricao;
+        notifyListeners();
+      }
+    });
 
     return response;
   }
