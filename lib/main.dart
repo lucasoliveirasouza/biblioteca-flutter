@@ -1,4 +1,5 @@
 
+import 'package:biblioteca/services/autor_service.dart';
 import 'package:biblioteca/services/categoria_service.dart';
 import 'package:biblioteca/services/editora_service.dart';
 import 'package:biblioteca/services/livro_service.dart';
@@ -13,6 +14,7 @@ void main() {
       ChangeNotifierProvider(create: (context) => CategoriaService()),
       ChangeNotifierProvider(create: (context) => LivroService()),
       ChangeNotifierProvider(create: (context) => EditoraService()),
+      ChangeNotifierProvider(create: (context) => AutorService()),
     ],
     child: MyApp(),
   ));

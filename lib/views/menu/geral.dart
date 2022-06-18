@@ -1,4 +1,5 @@
 
+import 'package:biblioteca/views/autor/autor_lista.dart';
 import 'package:biblioteca/views/categoria/categoria_lista.dart';
 import 'package:biblioteca/views/editora/editora_lista.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,9 @@ class _GeralViewState extends State<GeralView> {
                   "Autores",
                 ),
                 subtitle: Text("Todos autores disponíveis"),
+                onTap: (){
+                  Get.to(()=> AutorListaView());
+                },
               ),
             ),
             Card(
