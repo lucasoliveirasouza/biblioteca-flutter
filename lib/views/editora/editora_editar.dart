@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class EditoraEditar extends StatefulWidget {
+class EditoraEditarView extends StatefulWidget {
   Editora editora;
-  EditoraEditar({Key? key, required this.editora}) : super(key: key);
+  EditoraEditarView({Key? key, required this.editora}) : super(key: key);
 
   @override
-  _EditoraEditarState createState() => _EditoraEditarState();
+  _EditoraEditarViewState createState() => _EditoraEditarViewState();
 }
 
-class _EditoraEditarState extends State<EditoraEditar> {
+class _EditoraEditarViewState extends State<EditoraEditarView> {
   final nome = TextEditingController();
   final formKey = GlobalKey<FormState>();
   @override

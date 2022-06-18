@@ -1,6 +1,7 @@
 import 'package:biblioteca/models/editora.dart';
 import 'package:biblioteca/services/editora_service.dart';
 import 'package:biblioteca/views/editora/editora_cadastrar.dart';
+import 'package:biblioteca/views/editora/editora_livros.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,7 +39,7 @@ class _EditoraListaViewState extends State<EditoraListaView> {
                 child: ListTile(
                   title: Center(child: Text(lista[editora].nome)),
                   onTap: (){
-                    //Get.to(()=> CategoriaLivrosView(categoria: lista[categoria]));
+                    Get.to(()=> EditoraLivrosView(editora: lista[editora]));
                   },
                 ),
               );
