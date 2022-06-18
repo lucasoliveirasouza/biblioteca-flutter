@@ -18,16 +18,22 @@ class LivroDetalhesView extends StatefulWidget {
 class _LivroDetalhesViewState extends State<LivroDetalhesView> {
   @override
   Widget build(BuildContext context) {
+    Livro livro = widget.livro;
+    Provider.of<LivroService>(context).livros.forEach((element) {
+      if(element.id == widget.livro.id){
+        livro = element;
+      }
+    });
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.livro.titulo),
+        title: Text(livro.titulo),
         actions: [
           PopupMenuButton(
               elevation: 20,
               enabled: true,
               onSelected: (value) {
                 if(value=="editar"){
-                  Get.to(()=> LivroEditarView(livro: widget.livro));
+                  Get.to(()=> LivroEditarView(livro: livro));
                 }else if(value == "deletar"){
                   deletar();
 
@@ -82,7 +88,7 @@ class _LivroDetalhesViewState extends State<LivroDetalhesView> {
         child: ListView(
           children: [
             SizedBox(
-              child: Image.network(widget.livro.imagem),
+              child: Image.network(livro.imagem),
             ),
             SizedBox(
               height: 15,
@@ -101,35 +107,35 @@ class _LivroDetalhesViewState extends State<LivroDetalhesView> {
             ),
             RowTable(
               title: "Autor:",
-              valor: widget.livro.autor.nome,
+              valor: livro.autor.nome,
             ),
             SizedBox(
               height: 3,
             ),
             RowTable(
               title: "Categoria:",
-              valor: widget.livro.categoria.descricao,
+              valor: livro.categoria.descricao,
             ),
             SizedBox(
               height: 3,
             ),
             RowTable(
               title: "ISBN:",
-              valor: widget.livro.isbn,
+              valor: livro.isbn,
             ),
             SizedBox(
               height: 3,
             ),
             RowTable(
               title: "Editora:",
-              valor: widget.livro.editora.nome,
+              valor: livro.editora.nome,
             ),
             SizedBox(
               height: 3,
             ),
             RowTable(
               title: "Ano:",
-              valor: widget.livro.ano.toString(),
+              valor: livro.ano.toString(),
             ),
             SizedBox(
               height: 3,

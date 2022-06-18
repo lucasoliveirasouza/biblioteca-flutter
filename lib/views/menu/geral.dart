@@ -38,7 +38,7 @@ class _GeralViewState extends State<GeralView> {
             Card(
               child: ListTile(
                 title: Text(
-                    "Categoria",
+                    "Categorias",
                 ),
                 subtitle: Text("Todas categorias disponíveis"),
                 onTap: (){
@@ -50,7 +50,7 @@ class _GeralViewState extends State<GeralView> {
             Card(
               child: ListTile(
                 title: Text(
-                  "Editora",
+                  "Editoras",
                 ),
                 subtitle: Text("Todas editoras disponíveis"),
                 onTap: (){
