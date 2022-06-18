@@ -62,7 +62,7 @@ class _EditoraListaViewState extends State<EditoraListaView> {
                       return AlertDialog(
                         title: const Text("Deletar"),
                         content: const Text(
-                            "Deseja realmente deletar essa categoria?"),
+                            "Deseja realmente deletar essa editora?"),
                         actions: <Widget>[
                           TextButton(
                               onPressed: () => Navigator.of(context).pop(true),

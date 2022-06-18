@@ -61,7 +61,7 @@ class _AutorListaViewState extends State<AutorListaView> {
                       return AlertDialog(
                         title: const Text("Deletar"),
                         content: const Text(
-                            "Deseja realmente deletar essa categoria?"),
+                            "Deseja realmente deletar esse autor?"),
                         actions: <Widget>[
                           TextButton(
                               onPressed: () => Navigator.of(context).pop(true),
