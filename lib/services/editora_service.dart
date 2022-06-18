@@ -49,8 +49,7 @@ class EditoraService extends ChangeNotifier {
       });
 
     }
-    return edt
-    ;
+    return edt;
   }
 
   Future<http.Response> cadastrarEditora(String nome) async{
@@ -64,9 +63,14 @@ class EditoraService extends ChangeNotifier {
       }),
     );
 
-    _editoras.clear();
-    _buscarEditoras();
-    notifyListeners();
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      final editora = json;
+      print(editora["nome"]);
+      Editora edit = Editora(editora["id"].toString(), editora["nome"]);
+      _editoras.add(edit);
+      notifyListeners();
+    }
 
     return response;
   }
@@ -78,8 +82,8 @@ class EditoraService extends ChangeNotifier {
         'Content-Type': 'application/json',
       },
     );
-    _editoras.clear();
-    _buscarEditoras();
+
+    _editoras.removeWhere((element) => element.id == id);
     notifyListeners();
     return response;
   }
@@ -96,9 +100,12 @@ class EditoraService extends ChangeNotifier {
       }),
     );
 
-    _editoras.clear();
-    _buscarEditoras();
-    notifyListeners();
+    _editoras.forEach((element) {
+      if (element.id == id) {
+        element.nome = nome;
+        notifyListeners();
+      }
+    });
 
     return response;
   }

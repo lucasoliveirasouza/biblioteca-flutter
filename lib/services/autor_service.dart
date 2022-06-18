@@ -66,7 +66,6 @@ class AutorService extends ChangeNotifier {
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
       final autor = json;
-      print(autor["nome"]);
       Autor aut = Autor(autor["id"].toString(), autor["nome"]);
       _autores.add(aut);
       notifyListeners();
