@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class CategoriaCadatroView extends StatefulWidget {
-  CategoriaCadatroView({Key? key}) : super(key: key);
+class CategoriaCadatrarView extends StatefulWidget {
+  CategoriaCadatrarView({Key? key}) : super(key: key);
 
   @override
-  _CategoriaCadatroViewState createState() => _CategoriaCadatroViewState();
+  _CategoriaCadatrarViewState createState() => _CategoriaCadatrarViewState();
 }
 
-class _CategoriaCadatroViewState extends State<CategoriaCadatroView> {
+class _CategoriaCadatrarViewState extends State<CategoriaCadatrarView> {
   final descricao = TextEditingController();
   final formKey = GlobalKey<FormState>();
 

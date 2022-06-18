@@ -1,6 +1,6 @@
 import 'package:biblioteca/models/categoria.dart';
 import 'package:biblioteca/services/categoria_service.dart';
-import 'package:biblioteca/views/categoria/categoria_cadastro.dart';
+import 'package:biblioteca/views/categoria/categoria_cadastrar.dart';
 import 'package:biblioteca/views/categoria/categoria_editar.dart';
 import 'package:biblioteca/views/categoria/categoria_livros.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class _CategoriaListaViewState extends State<CategoriaListaView> {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              Get.to(() => CategoriaCadatroView());
+              Get.to(() => CategoriaCadatrarView());
             },
           )
         ],
