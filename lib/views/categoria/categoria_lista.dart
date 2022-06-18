@@ -47,6 +47,27 @@ class _CategoriaListaViewState extends State<CategoriaListaView> {
                     },
                   ),
                 ),
+                confirmDismiss: (DismissDirection direction) async {
+                  return await showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Deletar"),
+                        content: const Text(
+                            "Deseja realmente deletar essa categoria?"),
+                        actions: <Widget>[
+                          TextButton(
+                              onPressed: () => Navigator.of(context).pop(true),
+                              child: const Text("Deletar",style: TextStyle(color: Colors.red),)),
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(false),
+                            child: const Text("Cancelar"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
                 onDismissed: (direction) {
                   Provider.of<CategoriaService>(context, listen: false)
                       .deletarCategoria(lista[categoria].id.toString());
@@ -69,6 +90,29 @@ class _CategoriaListaViewState extends State<CategoriaListaView> {
             padding: EdgeInsets.all(16),
           );
         },
+      ),
+    );
+  }
+
+  deletar() {
+    Get.defaultDialog(
+      title: "Deseja deletar essa categoria?",
+      titleStyle: TextStyle(color: Colors.green),
+      middleTextStyle: TextStyle(color: Colors.white),
+      onConfirm: () {
+        Navigator.of(context).pop(false);
+      },
+      onCancel: () {
+        Navigator.of(context).pop(false);
+      },
+      textConfirm: "Confirmar",
+      textCancel: "Cancelar",
+      cancelTextColor: Colors.green,
+      confirmTextColor: Colors.white,
+      buttonColor: Colors.green,
+      radius: 1,
+      content: Column(
+        children: [],
       ),
     );
   }

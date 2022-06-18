@@ -54,6 +54,27 @@ class _AutorListaViewState extends State<AutorListaView> {
                     backgroundColor: Colors.green.shade100,
                   );
                 },
+                confirmDismiss: (DismissDirection direction) async {
+                  return await showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Deletar"),
+                        content: const Text(
+                            "Deseja realmente deletar essa categoria?"),
+                        actions: <Widget>[
+                          TextButton(
+                              onPressed: () => Navigator.of(context).pop(true),
+                              child: const Text("Deletar",style: TextStyle(color: Colors.red),)),
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(false),
+                            child: const Text("Cancelar"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
                 background: Container(
                   color: Colors.red,
                   child: Align(
