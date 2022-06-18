@@ -14,14 +14,12 @@ class _AutorCadastrarViewState extends State<AutorCadastrarView> {
   final nome = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Cadastrar autor"),
       ),
-
       body: Form(
         key: formKey,
         child: Container(
@@ -55,8 +53,16 @@ class _AutorCadastrarViewState extends State<AutorCadastrarView> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      Provider.of<AutorService>(context, listen: false).cadastrarAutor(nome.text);
-                      Get.back();
+                      Provider.of<AutorService>(context, listen: false)
+                          .cadastrarAutor(nome.text)
+                          .then((value) => {
+                                Get.snackbar(
+                                  "Cadastro de autor",
+                                  value.toString(),
+                                  backgroundColor: Colors.green.shade50
+                                )
+                              });
+                      Navigator.of(context).pop();
                     }
                   },
                   child: Text(

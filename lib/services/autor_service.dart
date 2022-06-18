@@ -55,41 +55,6 @@ class AutorService extends ChangeNotifier {
     return aut;
   }
 
-  Future<http.Response> cadastrarAutor(String nome) async{
-    final http.Response response = await http.post(
-      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/autor'),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode(<String, String>{
-        'nome': nome,
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      final json = jsonDecode(response.body);
-      final autor = json;
-      Autor aut = Autor(autor["id"].toString(), autor["nome"]);
-      _autores.add(aut);
-      notifyListeners();
-    }
-
-    return response;
-  }
-
-  Future<http.Response> deletarAutor(String id) async {
-    final http.Response response = await http.delete(
-      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/autor/${id}'),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-      },
-    );
-
-    _autores.removeWhere((element) => element.id == id);
-    notifyListeners();
-    return response;
-  }
-
   Future<List<Livro>> getLivros(Autor autor) async {
     List<Livro> lv = [];
     String uri = 'https://biblioteca-lucas.herokuapp.com/api/autor/${autor.id}/livros';
@@ -118,7 +83,33 @@ class AutorService extends ChangeNotifier {
     return lv;
   }
 
-  Future<http.Response> editarAutor(String id, String nome) async{
+  Future<String> cadastrarAutor(String nome) async{
+    final http.Response response = await http.post(
+      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/autor'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(<String, String>{
+        'nome': nome,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      final autor = json;
+      Autor aut = Autor(autor["id"].toString(), autor["nome"]);
+      _autores.add(aut);
+      notifyListeners();
+
+      return "Cadatrado com sucesso";
+    }else{
+      return "Não foi possível o cadastro";
+    }
+
+
+  }
+
+  Future<String> editarAutor(String id, String nome) async{
     final http.Response response = await http.put(
       Uri.parse('https://biblioteca-lucas.herokuapp.com/api/autor'),
       headers: <String, String>{
@@ -130,13 +121,29 @@ class AutorService extends ChangeNotifier {
       }),
     );
 
-    _autores.forEach((element) {
-      if (element.id == id) {
-        element.nome = nome;
-        notifyListeners();
-      }
-    });
+    if (response.statusCode == 200) {
+      _autores.forEach((element) {
+        if (element.id == id) {
+          element.nome = nome;
+          notifyListeners();
+        }
+      });
+      return "Editado com sucesso";
+    }else{
+      return "Não foi possível editar";
+    }
+  }
 
+  Future<http.Response> deletarAutor(String id) async {
+    final http.Response response = await http.delete(
+      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/autor/${id}'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+    );
+
+    _autores.removeWhere((element) => element.id == id);
+    notifyListeners();
     return response;
   }
 
