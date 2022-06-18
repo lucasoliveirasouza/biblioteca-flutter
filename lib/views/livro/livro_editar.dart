@@ -166,7 +166,7 @@ class _LivroEditarViewState extends State<LivroEditarView> {
                     )),
                 future: CategoriaService().getAll(),
                 onSelect: (value) {
-                  categoriaId = id_categoria;
+                  categoriaId = value;
                   id_categoria = categoriaId;
                 },
                 initialValue: categoriaId,
