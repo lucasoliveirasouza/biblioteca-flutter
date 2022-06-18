@@ -1,7 +1,11 @@
 
-import 'package:biblioteca/componentes/easy_dropdown.dart';
+import 'package:biblioteca/componentes/dropdown_autor.dart';
+import 'package:biblioteca/componentes/dropdown_categoria.dart';
+import 'package:biblioteca/componentes/dropdown_editora.dart';
 import 'package:biblioteca/models/livro.dart';
+import 'package:biblioteca/services/autor_service.dart';
 import 'package:biblioteca/services/categoria_service.dart';
+import 'package:biblioteca/services/editora_service.dart';
 import 'package:biblioteca/services/livro_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,14 +20,16 @@ class LivroCadastrarView extends StatefulWidget {
 
 class _LivroCadastrarViewState extends State<LivroCadastrarView> {
   final titulo = TextEditingController();
-  final autor = TextEditingController();
-  final editora = TextEditingController();
   final isbn = TextEditingController();
   final ano = TextEditingController();
   final imagem = TextEditingController();
   final formKey = GlobalKey<FormState>();
   String categoriaId = "";
-  String valor= "";
+  String editoraId = "";
+  String autorId = "";
+  String id_categoria= "";
+  String id_editora= "";
+  String id_autor= "";
 
 
   @override
@@ -59,44 +65,44 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
               SizedBox(
                 height: 15,
               ),
-              TextFormField(
-                controller: autor,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  label: Text("Autor"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      new Radius.circular(10.0),
-                    ),
-                  ),
+              ListTile(
+                contentPadding: EdgeInsets.only(bottom: 10),
+                subtitle: DropdownAutor(
+                  decoration: InputDecoration(
+                      labelText: "Autor",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(new Radius.circular(10)),
+                      )),
+                  future: AutorService().getAll(),
+                  onSelect: (value) {
+                    autorId = value;
+                    id_autor = autorId;
+                  },
+                  initialValue: autorId,
+                  child: 'nome',
+                  value: 'id',
                 ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Informe o autor do livro";
-                  }
-                  return null;
-                },
               ),
               SizedBox(
                 height: 15,
               ),
-              TextFormField(
-                controller: editora,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  label: Text("Editora"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      new Radius.circular(10.0),
-                    ),
-                  ),
+              ListTile(
+                contentPadding: EdgeInsets.only(bottom: 10),
+                subtitle: DropdownEditora(
+                  decoration: InputDecoration(
+                      labelText: "Editora",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(new Radius.circular(10)),
+                      )),
+                  future: EditoraService().getAll(),
+                  onSelect: (value) {
+                    editoraId = value;
+                    id_editora = editoraId;
+                  },
+                  initialValue: editoraId,
+                  child: 'nome',
+                  value: 'id',
                 ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Informe a editora do livro";
-                  }
-                  return null;
-                },
               ),
               SizedBox(
                 height: 15,
@@ -146,7 +152,7 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
 
               ListTile(
                 contentPadding: EdgeInsets.only(bottom: 10),
-                subtitle: EasyDropdown(
+                subtitle: DropdownCategoria(
                   decoration: InputDecoration(
                       labelText: "Categoria",
                       border: OutlineInputBorder(
@@ -155,7 +161,7 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                   future: CategoriaService().getAll(),
                   onSelect: (value) {
                     categoriaId = value;
-                    valor = categoriaId;
+                    id_categoria = categoriaId;
                   },
                   initialValue: categoriaId,
                   child: 'descricao',
@@ -190,7 +196,8 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       Livro livro = Livro(0, titulo.text, int.parse(ano.text), isbn.text, imagem.text);
-                      Provider.of<LivroService>(context, listen: false).cadastrarLivro(livro, valor);
+                      Provider.of<LivroService>(context, listen: false).cadastrarLivro(livro,
+                          id_categoria, id_autor, id_editora);
                       Get.back();
                     }
                   },

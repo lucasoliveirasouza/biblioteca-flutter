@@ -1,9 +1,10 @@
 
-import 'package:biblioteca/models/categoria.dart';
+
+import 'package:biblioteca/models/editora.dart';
 import 'package:flutter/material.dart';
 
-class EasyDropdown extends StatefulWidget {
-  Future<List<Categoria?>?> future;
+class DropdownEditora extends StatefulWidget {
+  Future<List<Editora?>?> future;
   String initialValue;
   String child;
   List<String>? childList = [];
@@ -12,7 +13,7 @@ class EasyDropdown extends StatefulWidget {
   Function(String)? onSelect;
   InputDecoration? decoration;
 
-  EasyDropdown(
+  DropdownEditora(
       {Key? key,
         required this.future,
         required this.initialValue,
@@ -25,18 +26,18 @@ class EasyDropdown extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<EasyDropdown> createState() => _EasyDropdownState();
+  State<DropdownEditora> createState() => _DropdownEditoraState();
 }
 
-class _EasyDropdownState
-    extends State<EasyDropdown> {
+class _DropdownEditoraState
+    extends State<DropdownEditora> {
   @override
   dynamic get(String propriedade) {}
 
   Widget build(BuildContext context) {
 
-    return FutureBuilder<List<Categoria?>?>(
-      future: widget.future as Future<List<Categoria?>?>,
+    return FutureBuilder<List<Editora?>?>(
+      future: widget.future as Future<List<Editora?>?>,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Text('Sem dados');

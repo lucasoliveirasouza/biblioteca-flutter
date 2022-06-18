@@ -1,7 +1,9 @@
 import 'dart:collection';
 import 'dart:convert';
 
+import 'package:biblioteca/models/autor.dart';
 import 'package:biblioteca/models/categoria.dart';
+import 'package:biblioteca/models/editora.dart';
 import 'package:biblioteca/models/livro.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -30,16 +32,22 @@ class LivroService extends ChangeNotifier {
         Categoria c = Categoria(livro["categoria"]["id"].toString(), livro["categoria"]["descricao"]);
         l.setCategoria(c);
 
+        Editora e = Editora(livro["editora"]["id"].toString(), livro["editora"]["nome"]);
+        l.setEditora(e);
+
+        Autor a = Autor(livro["autor"]["id"].toString(), livro["autor"]["nome"]);
+        l.setAutor(a);
+
         _livros.add(l);
       });
       notifyListeners();
     }
   }
 
-  Future<http.Response> cadastrarLivro(Livro livro, String id) async{
-    //print("https://biblioteca-lucas.herokuapp.com/api/categoria/${id}/livro");
+  Future<http.Response> cadastrarLivro(Livro livro, String id_categoria,String id_autor, String id_editora) async{
+    print("https://biblioteca-lucas.herokuapp.com//api/livro/${id_categoria}/${id_autor}/${id_editora}");
     final http.Response response = await http.post(
-      Uri.parse("https://biblioteca-lucas.herokuapp.com/api/categoria/${id}/livro"),
+      Uri.parse("https://biblioteca-lucas.herokuapp.com//api/livro/${id_categoria}/${id_autor}/${id_editora}"),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -58,14 +66,10 @@ class LivroService extends ChangeNotifier {
     return response;
   }
 
-  Future<http.Response> editarLivro(Livro livro, Categoria categoria) async{
-    final cat = jsonEncode(<String, String>{
-      'id': categoria.id,
-      "descricao": categoria.descricao,
-    });
-
+  Future<http.Response> editarLivro(Livro livro, String id_categoria,String id_autor,String id_editora) async{
+  print("https://biblioteca-lucas.herokuapp.com/api/livro/${id_categoria}/${id_autor}/${id_editora}");
     final http.Response response = await http.put(
-      Uri.parse("https://biblioteca-lucas.herokuapp.com/api/categoria/${categoria.id}/livro"),
+      Uri.parse("https://biblioteca-lucas.herokuapp.com/api/livro/${id_categoria}/${id_autor}/${id_editora}"),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -85,20 +89,15 @@ class LivroService extends ChangeNotifier {
     return response;
   }
 
-  Future<http.Response> deletarLivro(Livro livro, Categoria categoria) async {
+  Future<http.Response> deletarLivro(String id_livro) async {
+    print("https://biblioteca-lucas.herokuapp.com/api/livro/${id_livro}");
     final http.Response response = await http.delete(
-      Uri.parse("https://biblioteca-lucas.herokuapp.com/api/categoria/${categoria.id}/livro"),
+      Uri.parse("https://biblioteca-lucas.herokuapp.com/api/livro/${id_livro}/"),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
-      body: jsonEncode(<String, String>{
-        'id': livro.id.toString(),
-        "ano": livro.ano.toString(),
-        "imagem": livro.imagem,
-        "isbn": livro.isbn,
-        "titulo": livro.titulo,
-      }),
     );
+
     _livros.clear();
     _buscarLivros();
     notifyListeners();

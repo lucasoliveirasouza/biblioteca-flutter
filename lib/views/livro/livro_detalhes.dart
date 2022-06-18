@@ -146,9 +146,7 @@ class _LivroDetalhesViewState extends State<LivroDetalhesView> {
         titleStyle: TextStyle(color: Colors.green),
         middleTextStyle: TextStyle(color: Colors.white),
         onConfirm: () {
-          Livro livro = Livro(widget.livro.id, widget.livro.titulo, widget.livro.ano, widget.livro.isbn, widget.livro.imagem);
-
-          Provider.of<LivroService>(context, listen: false).deletarLivro(livro,widget.livro.categoria);
+          Provider.of<LivroService>(context, listen: false).deletarLivro("47");
           Get.close(0);
           Get.back();
         },
