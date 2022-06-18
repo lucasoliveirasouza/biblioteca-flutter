@@ -49,7 +49,7 @@ class AutorService extends ChangeNotifier {
       });
 
     }
-    return autores;
+    return aut;
   }
 
   Future<http.Response> cadastrarAutor(String nome) async{

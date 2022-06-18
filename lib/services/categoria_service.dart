@@ -53,7 +53,7 @@ class CategoriaService extends ChangeNotifier {
       });
 
     }
-    return categorias;
+    return cts;
   }
 
   Future<List<Livro>> getLivros(Categoria categoria) async {

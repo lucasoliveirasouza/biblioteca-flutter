@@ -49,7 +49,8 @@ class EditoraService extends ChangeNotifier {
       });
 
     }
-    return editoras;
+    return edt
+    ;
   }
 
   Future<http.Response> cadastrarEditora(String nome) async{

@@ -1,4 +1,3 @@
-
 import 'package:biblioteca/componentes/dropdown_autor.dart';
 import 'package:biblioteca/componentes/dropdown_categoria.dart';
 import 'package:biblioteca/componentes/dropdown_editora.dart';
@@ -27,13 +26,22 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
   String categoriaId = "";
   String editoraId = "";
   String autorId = "";
-  String id_categoria= "";
-  String id_editora= "";
-  String id_autor= "";
+  String id_categoria = "";
+  String id_editora = "";
+  String id_autor = "";
 
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
+
+  @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Cadastrar Livro"),
@@ -65,6 +73,7 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
               SizedBox(
                 height: 15,
               ),
+
               ListTile(
                 contentPadding: EdgeInsets.only(bottom: 10),
                 subtitle: DropdownAutor(
@@ -83,9 +92,7 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                   value: 'id',
                 ),
               ),
-              SizedBox(
-                height: 15,
-              ),
+
               ListTile(
                 contentPadding: EdgeInsets.only(bottom: 10),
                 subtitle: DropdownEditora(
@@ -104,9 +111,7 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                   value: 'id',
                 ),
               ),
-              SizedBox(
-                height: 15,
-              ),
+
               TextFormField(
                 controller: ano,
                 keyboardType: TextInputType.text,
@@ -149,7 +154,6 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
               SizedBox(
                 height: 15,
               ),
-
               ListTile(
                 contentPadding: EdgeInsets.only(bottom: 10),
                 subtitle: DropdownCategoria(
@@ -168,7 +172,6 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                   value: 'id',
                 ),
               ),
-
               TextFormField(
                 controller: imagem,
                 keyboardType: TextInputType.text,
@@ -195,9 +198,11 @@ class _LivroCadastrarViewState extends State<LivroCadastrarView> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      Livro livro = Livro(0, titulo.text, int.parse(ano.text), isbn.text, imagem.text);
-                      Provider.of<LivroService>(context, listen: false).cadastrarLivro(livro,
-                          id_categoria, id_autor, id_editora);
+                      Livro livro = Livro(0, titulo.text, int.parse(ano.text),
+                          isbn.text, imagem.text);
+                      Provider.of<LivroService>(context, listen: false)
+                          .cadastrarLivro(
+                              livro, id_categoria, id_autor, id_editora);
                       Get.back();
                     }
                   },
