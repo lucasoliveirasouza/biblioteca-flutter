@@ -62,7 +62,7 @@ class _CategoriaEditarViewState extends State<CategoriaEditarView> {
                               widget.categoria.id.toString(), descricao.text)
                           .then((value) => {
                                 Get.snackbar(
-                                    "Edição de autor", value.toString(),
+                                    "Edição de categoria", value.toString(),
                                     backgroundColor: Colors.green.shade50)
                               });
                       Get.back();
