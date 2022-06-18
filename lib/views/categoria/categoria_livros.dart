@@ -23,16 +23,23 @@ class _CategoriaLivrosViewState extends State<CategoriaLivrosView> {
         Provider.of<CategoriaService>(context, listen: false)
             .getLivros(widget.categoria);
 
+    Categoria categoria = widget.categoria;
+    Provider.of<CategoriaService>(context).categorias.forEach((element) {
+      if(element.id == widget.categoria.id){
+        categoria = element;
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.categoria.descricao),
+        title: Text(categoria.descricao),
         actions: [
           PopupMenuButton(
               elevation: 20,
               enabled: true,
               onSelected: (value) {
                 if(value=="editar"){
-                  Get.to(()=> CategoriaEditarView(categoria: widget.categoria));
+                  Get.to(()=> CategoriaEditarView(categoria: categoria));
                 }else if(value == "deletar"){
                   deletar();
 
