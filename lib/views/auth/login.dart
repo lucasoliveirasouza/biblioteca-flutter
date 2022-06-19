@@ -4,6 +4,7 @@ import 'package:biblioteca/views/auth/cadastrar_usuario.dart';
 import 'package:biblioteca/views/menu/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -54,8 +55,15 @@ class _LoginViewState extends State<LoginView> {
               height: 55,
               child: ElevatedButton(
                 onPressed: (){
-                  AuthService().logar(usuario.text, senha.text);
-                  Get.to(() => MenuView());
+                  AuthService().logar(usuario.text, senha.text)
+                      .then((value) => (){
+                    Get.snackbar(
+                        "Cadastro de usuário", value.toString(),
+                        backgroundColor: Colors.green.shade50);
+
+
+                  });
+
                 },
                 child: Text("Entrar"),
               ),

@@ -25,8 +25,8 @@ class AuthService extends ChangeNotifier{
         "username": usuario
       }),
     );
-    print(jsonDecode(response.body));
-    return "Sucesso";
+
+    return jsonDecode(response.body)["message"] ?? "Seja bem-vindo";
   }
 
   Future<String> registrar(String usuario,String email, String senha) async {
