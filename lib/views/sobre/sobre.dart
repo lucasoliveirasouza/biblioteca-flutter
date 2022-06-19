@@ -1,4 +1,5 @@
 import 'package:biblioteca/services/auth_service.dart';
+import 'package:biblioteca/views/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -82,8 +83,7 @@ class _SobreViewState extends State<SobreView> {
             TextButton(
               onPressed: () {
                 AuthService().logout();
-                Navigator.of(context).pop();
-                Get.back();
+                Get.to(() => LoginView());
               },
               child: Text(
                 "Sair",

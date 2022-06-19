@@ -1,0 +1,29 @@
+import 'package:biblioteca/views/auth/login.dart';
+import 'package:biblioteca/views/menu/menu.dart';
+import 'package:flutter/Material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+class AuthCheck extends StatefulWidget {
+  const AuthCheck({Key? key}) : super(key: key);
+
+  @override
+  _AuthCheckState createState() => _AuthCheckState();
+}
+
+class _AuthCheckState extends State<AuthCheck> {
+  final storage = new FlutterSecureStorage();
+  String? value;
+  @override
+  Widget build(BuildContext context) {
+    obtemTokem();
+    if(value == null){
+      return LoginView();
+    }else{
+      return MenuView();
+    }
+
+  }
+  obtemTokem() async{
+    value = await storage.read(key: "token");
+  }
+}

@@ -1,50 +1,52 @@
 import 'dart:convert';
+import 'package:biblioteca/services/autor_service.dart';
+import 'package:biblioteca/services/categoria_service.dart';
+import 'package:biblioteca/services/editora_service.dart';
+import 'package:biblioteca/services/livro_service.dart';
 import 'package:biblioteca/views/menu/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
-
-class AuthService extends ChangeNotifier{
-
+class AuthService extends ChangeNotifier {
   String _token = "";
 
-  AuthService() {
-  }
+  AuthService() {}
 
-  Future<String> logar(String usuario, String senha) async{
+  Future<String> logar(String usuario, String senha) async {
     final storage = new FlutterSecureStorage();
     String? value = await storage.read(key: "token");
-    if(value == null){
-      final http.Response response = await http.post(
-        Uri.parse("https://biblioteca-luc.herokuapp.com/api/auth/signin"),
-        headers: <String, String>{
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode(<String, String>{
-          "password": senha,
-          "username": usuario
-        }),
+    final http.Response response = await http.post(
+      Uri.parse("https://biblioteca-luc.herokuapp.com/api/auth/signin"),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body:
+          jsonEncode(<String, String>{"password": senha, "username": usuario}),
+    );
+    if (response.statusCode == 200) {
+      _token = jsonDecode(response.body)["accessToken"];
+      await storage.write(key: "token", value: _token);
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => CategoriaService()),
+          ChangeNotifierProvider(create: (context) => LivroService()),
+          ChangeNotifierProvider(create: (context) => EditoraService()),
+          ChangeNotifierProvider(create: (context) => AutorService()),
+
+        ],
+
       );
-      if (response.statusCode == 200) {
-        _token = jsonDecode(response.body)["accessToken"];
-
-        await storage.write(key: "token", value: _token);
-        Get.to(() => MenuView());
-        return "Seja bem-vindo";
-      }else{
-        return "Existe algum erro com suas credenciais";
-      }
-
-    }else{
       Get.to(() => MenuView());
+      return "Seja bem-vindo";
+    } else {
+      return "Existe algum erro com suas credenciais";
     }
-    return "Logado";
-
   }
 
-  Future<String> registrar(String usuario,String email, String senha) async {
+  Future<String> registrar(String usuario, String email, String senha) async {
     final http.Response response = await http.post(
       Uri.parse("https://biblioteca-luc.herokuapp.com/api/auth/signup"),
       headers: <String, String>{
@@ -56,13 +58,12 @@ class AuthService extends ChangeNotifier{
         "username": usuario
       }),
     );
-    return jsonDecode(response.body)["message"] ?? "Não foi possível realizar o cadastro";
+    return jsonDecode(response.body)["message"] ??
+        "Não foi possível realizar o cadastro";
   }
 
-  logout() async{
+  logout() async {
     final storage = new FlutterSecureStorage();
     await storage.delete(key: "token");
   }
-
-
 }

@@ -21,7 +21,7 @@ class AutorService extends ChangeNotifier {
 
   _buscarAutores() async {
     String? value = await storage.read(key: "token");
-
+  print(value);
     String uri = '${servidor1}api/autores';
     final response = await http.get(Uri.parse(uri), headers: {
       'Content-Type': 'application/json',
