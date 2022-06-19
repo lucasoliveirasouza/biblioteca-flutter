@@ -13,7 +13,6 @@ class AuthService extends ChangeNotifier{
   }
 
   _authCheck() {
-
   }
 
   Future<String> logar(String usuario, String senha) async{
@@ -27,15 +26,12 @@ class AuthService extends ChangeNotifier{
         "username": usuario
       }),
     );
-
     if (response.statusCode == 200) {
       Get.to(() => MenuView());
       return "Seja bem-vindo";
     }else{
       return "Existe algum erro com suas credenciais";
     }
-
-
   }
 
   Future<String> registrar(String usuario,String email, String senha) async {
