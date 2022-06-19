@@ -7,9 +7,6 @@ import 'package:biblioteca/models/livro.dart';
 import 'package:biblioteca/util/constantes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
-
-import 'auth_service.dart';
 
 class CategoriaService extends ChangeNotifier {
   List<Categoria> _categorias = [];
@@ -116,8 +113,6 @@ class CategoriaService extends ChangeNotifier {
       return "Não foi possível realizar o cadastro";
     }
   }
-
-
 
   Future<String> editarCategoria(String id, String descricao) async{
     final http.Response response = await http.put(
