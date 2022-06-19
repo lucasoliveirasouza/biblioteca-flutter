@@ -5,6 +5,7 @@ import 'package:biblioteca/models/autor.dart';
 import 'package:biblioteca/models/categoria.dart';
 import 'package:biblioteca/models/editora.dart';
 import 'package:biblioteca/models/livro.dart';
+import 'package:biblioteca/util/constantes.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,7 +19,7 @@ class LivroService extends ChangeNotifier {
   }
 
   _buscarLivros() async {
-    String uri = 'https://biblioteca-lucas.herokuapp.com/api/livros';
+    String uri = '${servidor1}api/livros';
     final response = await http
         .get(Uri.parse(uri), headers: {'Content-Type': 'application/json'});
 
@@ -46,7 +47,7 @@ class LivroService extends ChangeNotifier {
 
   Future<String> cadastrarLivro(Livro livro, String id_categoria,String id_autor, String id_editora) async{
     final http.Response response = await http.post(
-      Uri.parse("https://biblioteca-lucas.herokuapp.com/api/livro/${id_categoria}/${id_autor}/${id_editora}"),
+      Uri.parse("${servidor1}api/livro/${id_categoria}/${id_autor}/${id_editora}"),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -86,7 +87,7 @@ class LivroService extends ChangeNotifier {
 
   Future<String> editarLivro(Livro livro, String id_categoria,String id_autor,String id_editora) async{
     final http.Response response = await http.put(
-      Uri.parse("https://biblioteca-lucas.herokuapp.com/api/livro/${id_categoria}/${id_autor}/${id_editora}"),
+      Uri.parse("${servidor1}api/livro/${id_categoria}/${id_autor}/${id_editora}"),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -126,7 +127,7 @@ class LivroService extends ChangeNotifier {
   }
 
   Future<http.Response> deletarLivro(String id_livro) async {
-    print("https://biblioteca-lucas.herokuapp.com/api/livro/${id_livro}/");
+    print("${servidor1}api/livro/${id_livro}/");
     final http.Response response = await http.delete(
       Uri.parse("https://biblioteca-lucas.herokuapp.com/api/livro/${id_livro}/"),
       headers: <String, String>{

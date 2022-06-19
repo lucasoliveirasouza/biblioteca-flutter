@@ -5,6 +5,7 @@ import 'package:biblioteca/models/autor.dart';
 import 'package:biblioteca/models/categoria.dart';
 import 'package:biblioteca/models/editora.dart';
 import 'package:biblioteca/models/livro.dart';
+import 'package:biblioteca/util/constantes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,7 +20,7 @@ class CategoriaService extends ChangeNotifier {
   }
 
   _buscarCategorias() async {
-    String uri = 'https://biblioteca-lucas.herokuapp.com/api/categorias';
+    String uri = '${servidor1}api/categorias';
     final response = await http.get(Uri.parse(uri), headers: {
       'Content-Type': 'application/json'
     });
@@ -38,7 +39,7 @@ class CategoriaService extends ChangeNotifier {
 
   Future<List<Categoria?>?> getAll() async {
     List<Categoria> cts = [];
-    String uri = 'https://biblioteca-lucas.herokuapp.com/api/categorias';
+    String uri = '${servidor1}api/categorias';
     final response = await http.get(Uri.parse(uri), headers: {
       'Content-Type': 'application/json'
     });
@@ -58,7 +59,7 @@ class CategoriaService extends ChangeNotifier {
 
   Future<List<Livro>> getLivros(Categoria categoria) async {
     List<Livro> lv = [];
-    String uri = 'https://biblioteca-lucas.herokuapp.com/api/categoria/${categoria.id}/livros';
+    String uri = '${servidor1}api/categoria/${categoria.id}/livros';
     final response = await http
         .get(Uri.parse(uri), headers: {'Content-Type': 'application/json'});
 
@@ -86,7 +87,7 @@ class CategoriaService extends ChangeNotifier {
 
   Future<String> cadastrarCategoria(String descricao) async{
     final http.Response response = await http.post(
-      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/categoria'),
+      Uri.parse('${servidor1}api/categoria'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -111,7 +112,7 @@ class CategoriaService extends ChangeNotifier {
 
   Future<String> editarCategoria(String id, String descricao) async{
     final http.Response response = await http.put(
-      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/categoria'),
+      Uri.parse('${servidor1}api/categoria'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -136,7 +137,7 @@ class CategoriaService extends ChangeNotifier {
 
   Future<http.Response> deletarCategoria(String id) async {
     final http.Response response = await http.delete(
-      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/categoria/${id}'),
+      Uri.parse('${servidor1}api/categoria/${id}'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },

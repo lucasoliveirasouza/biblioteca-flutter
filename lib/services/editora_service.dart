@@ -4,6 +4,7 @@ import 'package:biblioteca/models/autor.dart';
 import 'package:biblioteca/models/categoria.dart';
 import 'package:biblioteca/models/editora.dart';
 import 'package:biblioteca/models/livro.dart';
+import 'package:biblioteca/util/constantes.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,7 +19,7 @@ class EditoraService extends ChangeNotifier {
   }
 
   _buscarEditoras() async {
-    String uri = 'https://biblioteca-lucas.herokuapp.com/api/editoras';
+    String uri = '${servidor1}api/editoras';
     final response = await http.get(Uri.parse(uri), headers: {
       'Content-Type': 'application/json'
     });
@@ -37,7 +38,7 @@ class EditoraService extends ChangeNotifier {
 
   Future<List<Editora?>?> getAll() async {
     List<Editora> edt = [];
-    String uri = 'https://biblioteca-lucas.herokuapp.com/api/editoras';
+    String uri = '${servidor1}api/editoras';
     final response = await http.get(Uri.parse(uri), headers: {
       'Content-Type': 'application/json'
     });
@@ -57,7 +58,7 @@ class EditoraService extends ChangeNotifier {
 
   Future<List<Livro>> getLivros(Editora editora) async {
     List<Livro> lv = [];
-    String uri = 'https://biblioteca-lucas.herokuapp.com/api/editora/${editora.id}/livros';
+    String uri = '${servidor1}api/editora/${editora.id}/livros';
     final response = await http
         .get(Uri.parse(uri), headers: {'Content-Type': 'application/json'});
 
@@ -85,7 +86,7 @@ class EditoraService extends ChangeNotifier {
 
   Future<String> cadastrarEditora(String nome) async{
     final http.Response response = await http.post(
-      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/editora'),
+      Uri.parse('${servidor1}api/editora'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -109,7 +110,7 @@ class EditoraService extends ChangeNotifier {
 
   Future<String> editarEditora(String id, String nome) async{
     final http.Response response = await http.put(
-      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/editora'),
+      Uri.parse('${servidor1}api/editora'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -134,7 +135,7 @@ class EditoraService extends ChangeNotifier {
 
   Future<http.Response> deletarEditora(String id) async {
     final http.Response response = await http.delete(
-      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/editora/${id}'),
+      Uri.parse('${servidor1}api/editora/${id}'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
