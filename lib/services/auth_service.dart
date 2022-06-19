@@ -14,16 +14,34 @@ class AuthService extends ChangeNotifier{
 
   }
 
-  Future<String> registrar(String usuario,String email, String senha) async {
+  Future<String> logar(String usuario, String senha) async{
     final http.Response response = await http.post(
-      Uri.parse('${servidor1}api/autor'),
+      Uri.parse("https://biblioteca-luc.herokuapp.com/api/auth/signin"),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
       body: jsonEncode(<String, String>{
-        'nome': usuario,
+        "password": senha,
+        "username": usuario
       }),
     );
+    print(jsonDecode(response.body));
+    return "Sucesso";
+  }
+
+  Future<String> registrar(String usuario,String email, String senha) async {
+    final http.Response response = await http.post(
+      Uri.parse("https://biblioteca-luc.herokuapp.com/api/auth/signup"),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(<String, String>{
+        "email": email,
+        "password": senha,
+        "username": usuario
+      }),
+    );
+    print(jsonDecode(response.body)["message"]);
     return "sucesso";
   }
 

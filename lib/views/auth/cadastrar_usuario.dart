@@ -1,4 +1,5 @@
 import 'package:biblioteca/componentes/form_field_padrao.dart';
+import 'package:biblioteca/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -69,7 +70,7 @@ class _CadastrarUsuarioViewState extends State<CadastrarUsuarioView> {
               height: 55,
               child: ElevatedButton(
                 onPressed: (){
-                  //Get.to(() => MenuView());
+                  AuthService().registrar(usuario.text, email.text, senha.text);
                 },
                 child: Text("Cadastrar"),
               ),

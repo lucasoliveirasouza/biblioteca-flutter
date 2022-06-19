@@ -1,4 +1,5 @@
 import 'package:biblioteca/componentes/form_field_padrao.dart';
+import 'package:biblioteca/services/auth_service.dart';
 import 'package:biblioteca/views/auth/cadastrar_usuario.dart';
 import 'package:biblioteca/views/menu/menu.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,7 @@ class _LoginViewState extends State<LoginView> {
               height: 55,
               child: ElevatedButton(
                 onPressed: (){
+                  AuthService().logar(usuario.text, senha.text);
                   Get.to(() => MenuView());
                 },
                 child: Text("Entrar"),
