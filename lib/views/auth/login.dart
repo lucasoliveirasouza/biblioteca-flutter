@@ -16,6 +16,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final usuario = TextEditingController();
   final senha = TextEditingController();
+  String verifica = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,13 +56,12 @@ class _LoginViewState extends State<LoginView> {
               height: 55,
               child: ElevatedButton(
                 onPressed: (){
-                  AuthService().logar(usuario.text, senha.text)
-                      .then((value) => (){
+                  Provider.of<AuthService>(context, listen: false)
+                      .logar(usuario.text, senha.text)
+                      .then((value) => {
                     Get.snackbar(
-                        "Cadastro de usuário", value.toString(),
-                        backgroundColor: Colors.green.shade50);
-
-
+                        "Login de usuário", value.toString(),
+                        backgroundColor: Colors.green.shade50)
                   });
 
                 },

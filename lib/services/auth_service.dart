@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:biblioteca/util/constantes.dart';
+import 'package:biblioteca/views/menu/menu.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService extends ChangeNotifier{
@@ -26,7 +28,14 @@ class AuthService extends ChangeNotifier{
       }),
     );
 
-    return jsonDecode(response.body)["message"] ?? "Seja bem-vindo";
+    if (response.statusCode == 200) {
+      Get.to(() => MenuView());
+      return "Seja bem-vindo";
+    }else{
+      return "Existe algum erro com suas credenciais";
+    }
+
+
   }
 
   Future<String> registrar(String usuario,String email, String senha) async {
