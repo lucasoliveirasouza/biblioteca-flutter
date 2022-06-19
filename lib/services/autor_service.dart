@@ -4,6 +4,7 @@ import 'package:biblioteca/models/autor.dart';
 import 'package:biblioteca/models/categoria.dart';
 import 'package:biblioteca/models/editora.dart';
 import 'package:biblioteca/models/livro.dart';
+import 'package:biblioteca/util/constantes.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,7 +19,7 @@ class AutorService extends ChangeNotifier {
   }
 
   _buscarAutores() async {
-    String uri = 'https://biblioteca-lucas.herokuapp.com/api/autores';
+    String uri = '${servidor1}api/autores';
     final response = await http.get(Uri.parse(uri), headers: {
       'Content-Type': 'application/json'
     });
@@ -37,7 +38,7 @@ class AutorService extends ChangeNotifier {
 
   Future<List<Autor?>?> getAll() async {
     List<Autor> aut = [];
-    String uri = 'https://biblioteca-lucas.herokuapp.com/api/autores';
+    String uri = '${servidor1}api/autores';
     final response = await http.get(Uri.parse(uri), headers: {
       'Content-Type': 'application/json'
     });
@@ -57,7 +58,7 @@ class AutorService extends ChangeNotifier {
 
   Future<List<Livro>> getLivros(Autor autor) async {
     List<Livro> lv = [];
-    String uri = 'https://biblioteca-lucas.herokuapp.com/api/autor/${autor.id}/livros';
+    String uri = '${servidor1}api/autor/${autor.id}/livros';
     final response = await http
         .get(Uri.parse(uri), headers: {'Content-Type': 'application/json'});
 
@@ -85,7 +86,7 @@ class AutorService extends ChangeNotifier {
 
   Future<String> cadastrarAutor(String nome) async{
     final http.Response response = await http.post(
-      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/autor'),
+      Uri.parse('${servidor1}api/autor'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -111,7 +112,7 @@ class AutorService extends ChangeNotifier {
 
   Future<String> editarAutor(String id, String nome) async{
     final http.Response response = await http.put(
-      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/autor'),
+      Uri.parse('${servidor1}api/autor'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -136,7 +137,7 @@ class AutorService extends ChangeNotifier {
 
   Future<http.Response> deletarAutor(String id) async {
     final http.Response response = await http.delete(
-      Uri.parse('https://biblioteca-lucas.herokuapp.com/api/autor/${id}'),
+      Uri.parse('${servidor1}api/autor/${id}'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
