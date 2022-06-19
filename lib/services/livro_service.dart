@@ -86,6 +86,7 @@ class LivroService extends ChangeNotifier {
   }
 
   Future<String> editarLivro(Livro livro, String id_categoria,String id_autor,String id_editora) async{
+    print("${servidor1}api/livro/${id_categoria}/${id_autor}/${id_editora}");
     final http.Response response = await http.put(
       Uri.parse("${servidor1}api/livro/${id_categoria}/${id_autor}/${id_editora}"),
       headers: <String, String>{

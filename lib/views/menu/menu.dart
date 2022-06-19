@@ -1,7 +1,7 @@
-import 'package:biblioteca/views/categoria/categoria_lista.dart';
 import 'package:biblioteca/views/livro/livro_lista.dart';
 import 'package:biblioteca/views/sobre/sobre.dart';
 import 'package:flutter/material.dart';
+
 
 import 'geral.dart';
 

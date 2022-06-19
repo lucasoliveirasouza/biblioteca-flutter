@@ -1,6 +1,5 @@
 import 'dart:collection';
 import 'dart:convert';
-
 import 'package:biblioteca/models/autor.dart';
 import 'package:biblioteca/models/categoria.dart';
 import 'package:biblioteca/models/editora.dart';
@@ -8,9 +7,13 @@ import 'package:biblioteca/models/livro.dart';
 import 'package:biblioteca/util/constantes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+
+import 'auth_service.dart';
 
 class CategoriaService extends ChangeNotifier {
   List<Categoria> _categorias = [];
+  String _token = "";
 
   UnmodifiableListView<Categoria> get categorias =>
       UnmodifiableListView(_categorias);
@@ -19,10 +22,16 @@ class CategoriaService extends ChangeNotifier {
     _buscarCategorias();
   }
 
+  void setToken(String value){
+    _token = value;
+    notifyListeners();
+  }
+
   _buscarCategorias() async {
     String uri = '${servidor1}api/categorias';
     final response = await http.get(Uri.parse(uri), headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      //'Authorization': "Bearer ${_token}"
     });
 
     if (response.statusCode == 200) {

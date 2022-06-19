@@ -31,9 +31,7 @@ class _LivroEditarViewState extends State<LivroEditarView> {
   String categoriaId = "";
   String editoraId = "";
   String autorId = "";
-  String id_categoria = "";
-  String id_editora = "";
-  String id_autor = "";
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +65,6 @@ class _LivroEditarViewState extends State<LivroEditarView> {
                 future: AutorService().getAll(),
                 onSelect: (value) {
                   autorId = value;
-                  id_autor = autorId;
                 },
                 initialValue: autorId,
                 child: 'nome',
@@ -81,7 +78,6 @@ class _LivroEditarViewState extends State<LivroEditarView> {
                 future: EditoraService().getAll(),
                 onSelect: (value) {
                   editoraId = value;
-                  id_editora = editoraId;
                 },
                 initialValue: editoraId,
                 child: 'nome',
@@ -109,7 +105,6 @@ class _LivroEditarViewState extends State<LivroEditarView> {
                 future: CategoriaService().getAll(),
                 onSelect: (value) {
                   categoriaId = value;
-                  id_categoria = categoriaId;
                 },
                 initialValue: categoriaId,
                 child: 'descricao',
@@ -135,7 +130,7 @@ class _LivroEditarViewState extends State<LivroEditarView> {
 
                       Provider.of<LivroService>(context, listen: false)
                           .editarLivro(
-                              livro, id_categoria, id_autor, id_editora)
+                              livro, categoriaId, autorId, editoraId)
                           .then((value) => {
                                 Get.snackbar(
                                     "Edição de livro", value.toString(),

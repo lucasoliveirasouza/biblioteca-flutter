@@ -1,18 +1,21 @@
 import 'dart:convert';
-
-import 'package:biblioteca/util/constantes.dart';
 import 'package:biblioteca/views/menu/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:biblioteca/services/categoria_service.dart';
 
 class AuthService extends ChangeNotifier{
 
+  String _token = "";
   AuthService() {
     _authCheck();
   }
 
   _authCheck() {
+
+    _token = "";
   }
 
   Future<String> logar(String usuario, String senha) async{
@@ -27,11 +30,16 @@ class AuthService extends ChangeNotifier{
       }),
     );
     if (response.statusCode == 200) {
+      _token = jsonDecode(response.body)["accessToken"];
       Get.to(() => MenuView());
       return "Seja bem-vindo";
     }else{
       return "Existe algum erro com suas credenciais";
     }
+  }
+
+  String getToken(){
+    return _token;
   }
 
   Future<String> registrar(String usuario,String email, String senha) async {
