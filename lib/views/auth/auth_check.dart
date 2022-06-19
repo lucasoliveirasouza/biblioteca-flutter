@@ -13,10 +13,24 @@ class AuthCheck extends StatefulWidget {
 class _AuthCheckState extends State<AuthCheck> {
   final storage = new FlutterSecureStorage();
   String? value;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    obtemTokem();
+  }
+
   @override
   Widget build(BuildContext context) {
-    obtemTokem();
-    if(value == null){
+
+    if(isLoading){
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }else if(value == null){
       return LoginView();
     }else{
       return MenuView();
@@ -25,5 +39,10 @@ class _AuthCheckState extends State<AuthCheck> {
   }
   obtemTokem() async{
     value = await storage.read(key: "token");
+    setState(() {
+      isLoading = false;
+    });
+
   }
+
 }
