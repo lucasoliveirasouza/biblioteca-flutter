@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 
 class CategoriaService extends ChangeNotifier {
   List<Categoria> _categorias = [];
+  final storage = new FlutterSecureStorage();
 
   UnmodifiableListView<Categoria> get categorias =>
       UnmodifiableListView(_categorias);
@@ -20,7 +21,7 @@ class CategoriaService extends ChangeNotifier {
   }
 
   _buscarCategorias() async {
-    final storage = new FlutterSecureStorage();
+
     String? value = await storage.read(key: "token");
 
     String uri = '${servidor1}api/categorias';
@@ -43,7 +44,6 @@ class CategoriaService extends ChangeNotifier {
   }
 
   Future<List<Categoria?>?> getAll() async {
-    final storage = new FlutterSecureStorage();
     String? value = await storage.read(key: "token");
 
     List<Categoria> cts = [];
@@ -67,7 +67,6 @@ class CategoriaService extends ChangeNotifier {
   }
 
   Future<List<Livro>> getLivros(Categoria categoria) async {
-    final storage = new FlutterSecureStorage();
     String? value = await storage.read(key: "token");
 
     List<Livro> lv = [];
@@ -104,7 +103,6 @@ class CategoriaService extends ChangeNotifier {
   }
 
   Future<String> cadastrarCategoria(String descricao) async {
-    final storage = new FlutterSecureStorage();
     String? value = await storage.read(key: "token");
 
     final http.Response response = await http.post(
@@ -131,7 +129,6 @@ class CategoriaService extends ChangeNotifier {
   }
 
   Future<String> editarCategoria(String id, String descricao) async {
-    final storage = new FlutterSecureStorage();
     String? value = await storage.read(key: "token");
 
     final http.Response response = await http.put(
@@ -160,7 +157,6 @@ class CategoriaService extends ChangeNotifier {
   }
 
   Future<http.Response> deletarCategoria(String id) async {
-    final storage = new FlutterSecureStorage();
     String? value = await storage.read(key: "token");
 
 
