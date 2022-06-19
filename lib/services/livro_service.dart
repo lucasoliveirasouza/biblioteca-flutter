@@ -147,18 +147,23 @@ class LivroService extends ChangeNotifier {
 
   Future<http.Response> deletarLivro(String id_livro) async {
     String? value = await storage.read(key: "token");
-    print("${servidor1}api/livro/${id_livro}/");
     final http.Response response = await http.delete(
       Uri.parse(
-          "https://biblioteca-lucas.herokuapp.com/api/livro/${id_livro}/"),
+          "${servidor1}api/livro/${id_livro}/"),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'Authorization': "Bearer ${value}"
       },
     );
 
-    _livros.removeWhere((element) => element.id.toString() == id_livro);
-    notifyListeners();
+    if (response.statusCode == 200) {
+      _livros.removeWhere((element) => element.id.toString() == id_livro);
+      notifyListeners();
+    }else{
+
+    }
+
+
     return response;
   }
 }
