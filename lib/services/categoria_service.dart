@@ -6,6 +6,7 @@ import 'package:biblioteca/models/editora.dart';
 import 'package:biblioteca/models/livro.dart';
 import 'package:biblioteca/util/constantes.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class CategoriaService extends ChangeNotifier {
@@ -25,10 +26,13 @@ class CategoriaService extends ChangeNotifier {
   }
 
   _buscarCategorias() async {
+    final storage = new FlutterSecureStorage();
+    String? value = await storage.read(key: "token");
+
     String uri = '${servidor1}api/categorias';
     final response = await http.get(Uri.parse(uri), headers: {
       'Content-Type': 'application/json',
-      //'Authorization': "Bearer ${_token}"
+      'Authorization': "Bearer ${value}"
     });
 
     if (response.statusCode == 200) {

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:biblioteca/views/menu/menu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -31,6 +32,14 @@ class AuthService extends ChangeNotifier{
     );
     if (response.statusCode == 200) {
       _token = jsonDecode(response.body)["accessToken"];
+      final storage = new FlutterSecureStorage();
+      await storage.write(key: "token", value: _token);
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => CategoriaService())
+        ],
+
+      );
       Get.to(() => MenuView());
       return "Seja bem-vindo";
     }else{
