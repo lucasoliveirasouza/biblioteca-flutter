@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 
 class AuthService extends ChangeNotifier {
   String _token = "";
+  bool isLoading = true;
 
   AuthService() {}
 
