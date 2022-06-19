@@ -1,4 +1,6 @@
+import 'package:biblioteca/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SobreView extends StatefulWidget {
   const SobreView({Key? key}) : super(key: key);
@@ -15,7 +17,9 @@ class _SobreViewState extends State<SobreView> {
         title: Text("Sobre"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              logout();
+            },
             icon: Icon(Icons.exit_to_app),
           )
         ],
@@ -64,6 +68,37 @@ class _SobreViewState extends State<SobreView> {
           ),
         ),
       ),
+    );
+  }
+
+  logout() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Sair"),
+          content: const Text("Deseja realmente sair do aplicativo?"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                AuthService().logout();
+                Navigator.of(context).pop();
+                Get.back();
+              },
+              child: Text(
+                "Sair",
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: Text("Cancelar"),
+            ),
+          ],
+        );
+      },
     );
   }
 }
