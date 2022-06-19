@@ -34,12 +34,6 @@ class AuthService extends ChangeNotifier{
       _token = jsonDecode(response.body)["accessToken"];
       final storage = new FlutterSecureStorage();
       await storage.write(key: "token", value: _token);
-      MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context) => CategoriaService())
-        ],
-
-      );
       Get.to(() => MenuView());
       return "Seja bem-vindo";
     }else{

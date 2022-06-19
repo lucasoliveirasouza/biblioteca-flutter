@@ -11,18 +11,12 @@ import 'package:http/http.dart' as http;
 
 class CategoriaService extends ChangeNotifier {
   List<Categoria> _categorias = [];
-  String _token = "";
 
   UnmodifiableListView<Categoria> get categorias =>
       UnmodifiableListView(_categorias);
 
   CategoriaService() {
     _buscarCategorias();
-  }
-
-  void setToken(String value){
-    _token = value;
-    notifyListeners();
   }
 
   _buscarCategorias() async {
@@ -40,7 +34,8 @@ class CategoriaService extends ChangeNotifier {
       List<dynamic> listaCategorias = json;
 
       listaCategorias.forEach((categoria) {
-        Categoria c = Categoria(categoria["id"].toString(), categoria["descricao"]);
+        Categoria c =
+            Categoria(categoria["id"].toString(), categoria["descricao"]);
         _categorias.add(c);
       });
       notifyListeners();
@@ -48,10 +43,14 @@ class CategoriaService extends ChangeNotifier {
   }
 
   Future<List<Categoria?>?> getAll() async {
+    final storage = new FlutterSecureStorage();
+    String? value = await storage.read(key: "token");
+
     List<Categoria> cts = [];
     String uri = '${servidor1}api/categorias';
     final response = await http.get(Uri.parse(uri), headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer ${value}"
     });
 
     if (response.statusCode == 200) {
@@ -59,34 +58,43 @@ class CategoriaService extends ChangeNotifier {
       List<dynamic> listaCategorias = json;
 
       listaCategorias.forEach((categoria) {
-        Categoria c = Categoria(categoria["id"].toString(), categoria["descricao"]);
+        Categoria c =
+            Categoria(categoria["id"].toString(), categoria["descricao"]);
         cts.add(c);
       });
-
     }
     return cts;
   }
 
   Future<List<Livro>> getLivros(Categoria categoria) async {
+    final storage = new FlutterSecureStorage();
+    String? value = await storage.read(key: "token");
+
     List<Livro> lv = [];
     String uri = '${servidor1}api/categoria/${categoria.id}/livros';
-    final response = await http
-        .get(Uri.parse(uri), headers: {'Content-Type': 'application/json'});
+    final response = await http.get(Uri.parse(uri), headers: {
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer ${value}"
+    });
 
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
       List<dynamic> listaLivros = json;
 
       listaLivros.forEach((livro) {
-        Livro l = Livro(livro["id"], livro["titulo"],livro["ano"], livro["isbn"], livro["imagem"]);
+        Livro l = Livro(livro["id"], livro["titulo"], livro["ano"],
+            livro["isbn"], livro["imagem"]);
 
-        Categoria c = Categoria(livro["categoria"]["id"].toString(), livro["categoria"]["descricao"]);
+        Categoria c = Categoria(livro["categoria"]["id"].toString(),
+            livro["categoria"]["descricao"]);
         l.setCategoria(c);
 
-        Editora e = Editora(livro["editora"]["id"].toString(), livro["editora"]["nome"]);
+        Editora e = Editora(
+            livro["editora"]["id"].toString(), livro["editora"]["nome"]);
         l.setEditora(e);
 
-        Autor a = Autor(livro["autor"]["id"].toString(), livro["autor"]["nome"]);
+        Autor a =
+            Autor(livro["autor"]["id"].toString(), livro["autor"]["nome"]);
         l.setAutor(a);
 
         lv.add(l);
@@ -95,11 +103,15 @@ class CategoriaService extends ChangeNotifier {
     return lv;
   }
 
-  Future<String> cadastrarCategoria(String descricao) async{
+  Future<String> cadastrarCategoria(String descricao) async {
+    final storage = new FlutterSecureStorage();
+    String? value = await storage.read(key: "token");
+
     final http.Response response = await http.post(
       Uri.parse('${servidor1}api/categoria'),
       headers: <String, String>{
         'Content-Type': 'application/json',
+        'Authorization': "Bearer ${value}",
       },
       body: jsonEncode(<String, String>{
         'descricao': descricao,
@@ -113,16 +125,20 @@ class CategoriaService extends ChangeNotifier {
       _categorias.add(c);
       notifyListeners();
       return "Cadatrado com sucesso";
-    }else{
+    } else {
       return "Não foi possível realizar o cadastro";
     }
   }
 
-  Future<String> editarCategoria(String id, String descricao) async{
+  Future<String> editarCategoria(String id, String descricao) async {
+    final storage = new FlutterSecureStorage();
+    String? value = await storage.read(key: "token");
+
     final http.Response response = await http.put(
       Uri.parse('${servidor1}api/categoria'),
       headers: <String, String>{
         'Content-Type': 'application/json',
+        'Authorization': "Bearer ${value}",
       },
       body: jsonEncode(<String, String>{
         'id': id,
@@ -138,16 +154,21 @@ class CategoriaService extends ChangeNotifier {
         }
       });
       return "Editado com sucesso";
-    }else{
+    } else {
       return "Não foi possível editar";
     }
   }
 
   Future<http.Response> deletarCategoria(String id) async {
+    final storage = new FlutterSecureStorage();
+    String? value = await storage.read(key: "token");
+
+
     final http.Response response = await http.delete(
       Uri.parse('${servidor1}api/categoria/${id}'),
       headers: <String, String>{
         'Content-Type': 'application/json',
+        'Authorization': "Bearer ${value}",
       },
     );
 
@@ -155,5 +176,4 @@ class CategoriaService extends ChangeNotifier {
     notifyListeners();
     return response;
   }
-
 }

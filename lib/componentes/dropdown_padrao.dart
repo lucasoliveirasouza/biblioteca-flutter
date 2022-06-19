@@ -33,7 +33,6 @@ class _DropdownPadraoState<T extends IModel>
   dynamic get(String propriedade) {}
 
   Widget build(BuildContext context) {
-    debugPrint('=-------------');
 
     return FutureBuilder<List<T?>?>(
       future: widget.future as Future<List<T?>?>,
