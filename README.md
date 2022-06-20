@@ -13,9 +13,7 @@
 <img align="center" title="Flutter" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg"> <img align="center" title="Heroku" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/heroku/heroku-original.svg">
 
 #### Descrição:
-Aplicativo Flutter criado para consumir API construída em Spring Boot. Com ele, é possível listar, criar, editar e deletar **Categoria** de livros e também realizar o CRUD de **Livro**. <br>
-
-Como projeto fututo, serão implementados as entidades Autor e Editora. Também será adicionado o Spring Security.
+Aplicativo Flutter criado para consumir API construída em Spring Boot. Com ele, é possível fazer cadastro e login de usuário, além listar, criar, editar e deletar **Categoria** de livros e também realizar o CRUD de **Livro**, caso tenha um perfil de administrador ou moderador. Existe também o mesmo CRUD para AUtor e Editora. <br>
 
 #### O Aplicativo:
 
