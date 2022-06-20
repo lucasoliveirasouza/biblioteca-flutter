@@ -15,7 +15,7 @@
 #### Descrição:
 Aplicativo Flutter criado para consumir uma [API construída em Spring Boot.](https://github.com/lucasoliveirasouza/biblioteca-API)  <br>
 No aplicativo é possível realizar as seguintes ações:
-* Realizar cadastro, login e logout de usuário;
+* Realizar cadastro, login e logout de usuário:
 * Listar, cadastrar, editar e deletar **livro** (Se for Admin. Caso contrário, é permitido apenas a listagem);
 * Listar, cadastrar, editar e deletar **autor** (Se for Admin. Caso contrário, é permitido apenas a listagem);
 * Listar, cadastrar, editar e deletar **editora** (Se for Admin. Caso contrário, é permitido apenas a listagem);
