@@ -36,9 +36,7 @@ class AuthService extends ChangeNotifier {
           ChangeNotifierProvider(create: (context) => LivroService()),
           ChangeNotifierProvider(create: (context) => EditoraService()),
           ChangeNotifierProvider(create: (context) => AutorService()),
-
         ],
-
       );
       Get.to(() => MenuView());
       return "Seja bem-vindo";
@@ -59,6 +57,7 @@ class AuthService extends ChangeNotifier {
         "username": usuario
       }),
     );
+    print(jsonDecode(response.body));
     return jsonDecode(response.body)["message"] ??
         "Não foi possível realizar o cadastro";
   }
