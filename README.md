@@ -22,7 +22,7 @@ No aplicativo é possível realizar as seguintes ações:
 * Listar, cadastrar, editar e deletar **categoria/gênero** (Se for Admin. Caso contrário, é permitido apenas a listagem);
 Vale ressaltar que um livro sempre tem um autor, categoria e editora associados.
 
-A API Consumida encontra-se documentada [aqui](https://biblioteca-luc.herokuapp.com/swagger-ui.html).
+A API consumida encontra-se documentada [aqui](https://biblioteca-luc.herokuapp.com/swagger-ui.html).
 
 #### O Aplicativo:
 
