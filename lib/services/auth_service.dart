@@ -57,7 +57,7 @@ class AuthService extends ChangeNotifier {
         "username": usuario
       }),
     );
-    print(jsonDecode(response.body));
+    print(jsonDecode(response.body)["message"]);
     return jsonDecode(response.body)["message"] ??
         "Não foi possível realizar o cadastro";
   }
