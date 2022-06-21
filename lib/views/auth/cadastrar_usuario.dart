@@ -89,12 +89,10 @@ class _CadastrarUsuarioViewState extends State<CadastrarUsuarioView> {
                                 "Erro ao cadastrar usuário", value.toString(),
                                 backgroundColor: Colors.red.shade100);
                           }
-
-
                         });
                       }else{
                         Get.snackbar(
-                            "Cadastro de usuário", "As senhas são diferentes",
+                            "Erro ao cadastrar usuário", "As senhas são diferentes",
                             backgroundColor: Colors.red.shade100);
                       }
                     }
