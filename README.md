@@ -13,7 +13,7 @@
 <img align="center" title="Dart" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/dart/dart-original.svg">  <img align="center" title="Flutter" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg"> <img align="center" title="Heroku" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/heroku/heroku-original.svg">
 
 #### Descrição:
-Aplicativo Flutter criado para consumir uma [API construída em Spring Boot.](https://github.com/lucasoliveirasouza/biblioteca-API)  <br>
+Aplicativo Flutter criado para consumir uma [API construída em Spring Boot](https://github.com/lucasoliveirasouza/biblioteca-API). <br>
 No aplicativo é possível realizar as seguintes ações:
 * Realizar cadastro, login e logout de usuário:
 * Listar, cadastrar, editar e deletar **livro** (Se for Admin. Caso contrário, é permitido apenas a listagem);
