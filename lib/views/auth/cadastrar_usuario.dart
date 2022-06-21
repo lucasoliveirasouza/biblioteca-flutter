@@ -82,7 +82,7 @@ class _CadastrarUsuarioViewState extends State<CadastrarUsuarioView> {
                           if(value == "Usuario registrado com sucesso!"){
                             Get.snackbar(
                                 "Cadastro de usuário", value.toString(),
-                                backgroundColor: Colors.green.shade50);
+                                backgroundColor: Colors.green.shade100);
                             Navigator.of(context).pop();
                           }else{
                             Get.snackbar(
