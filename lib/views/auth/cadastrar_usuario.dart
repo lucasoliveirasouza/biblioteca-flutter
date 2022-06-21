@@ -78,10 +78,19 @@ class _CadastrarUsuarioViewState extends State<CadastrarUsuarioView> {
                       if(senha.text == confirmarSenha.text){
                         Provider.of<AuthService>(context, listen: false)
                             .registrar(usuario.text, email.text, senha.text)
-                            .then((value) => {
-                          Get.snackbar(
-                              "Cadastro de usuário", value.toString(),
-                              backgroundColor: Colors.green.shade50)
+                            .then((value){
+                          if(value == "Usuario registrado com sucesso!"){
+                            Get.snackbar(
+                                "Cadastro de usuário", value.toString(),
+                                backgroundColor: Colors.green.shade50);
+                            Navigator.of(context).pop();
+                          }else{
+                            Get.snackbar(
+                                "Erro ao cadastrar usuário", value.toString(),
+                                backgroundColor: Colors.red.shade100);
+                          }
+
+
                         });
                       }else{
                         Get.snackbar(
