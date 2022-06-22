@@ -16,10 +16,10 @@
 Aplicativo Flutter criado para consumir uma [API construída em Spring Boot](https://github.com/lucasoliveirasouza/biblioteca-API). <br>
 No aplicativo é possível realizar as seguintes ações:
 * Realizar cadastro, login e logout de usuário:
-* Listar, cadastrar, editar e deletar **livro** (Se for Admin. Caso contrário, é permitido apenas a listagem);
-* Listar, cadastrar, editar e deletar **autor** (Se for Admin. Caso contrário, é permitido apenas a listagem);
-* Listar, cadastrar, editar e deletar **editora** (Se for Admin. Caso contrário, é permitido apenas a listagem);
-* Listar, cadastrar, editar e deletar **categoria/gênero** (Se for Admin. Caso contrário, é permitido apenas a listagem);
+* Listar, cadastrar, editar e deletar **Livro** (Se for Admin. Caso contrário, é permitido apenas a listagem);
+* Listar, cadastrar, editar e deletar **Autor** (Se for Admin. Caso contrário, é permitido apenas a listagem);
+* Listar, cadastrar, editar e deletar **Editora** (Se for Admin. Caso contrário, é permitido apenas a listagem);
+* Listar, cadastrar, editar e deletar **Categoria/gênero** (Se for Admin. Caso contrário, é permitido apenas a listagem);
 Vale ressaltar que um livro sempre tem um autor, categoria e editora associados.
 
 A API consumida encontra-se documentada [aqui](https://biblioteca-luc.herokuapp.com/swagger-ui.html).
