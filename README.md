@@ -25,7 +25,7 @@ Vale ressaltar que um livro sempre tem um autor, categoria e editora associados.
 A API consumida encontra-se documentada [aqui](https://biblioteca-luc.herokuapp.com/swagger-ui.html).
 
 #### O Aplicativo:
-
+O aplicativo encontra-se em fae final e para o futuro, novas funcionalidades serão adicionadas 
 
 <div align="center">
   
